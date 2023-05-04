@@ -1,0 +1,42 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Users</title>
+  <script type="text/javascript" th:src="@{/tailwind.js}"></script>
+
+  
+
+</head>
+<body>
+  <div class="div">
+    <h2>List User</h2>
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Sex</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="emp: ${employees}">
+          <td th:text="${emp.name}"></td>
+          <td th:text="${emp.username}"></td>
+          <td th:text="${emp.sex}"></td>
+          <td th:text="${emp.role.type}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <div class="w-4/5 border-2 bg-red-500 aspect-[9/4]">
+    <div class="w-full bg-black aspect-[9/1]"></div>
+  </div> -->
+  <!-- <script type="text/javascript" src="../static/tailwind.js" /> -->
+</body>
+</html>

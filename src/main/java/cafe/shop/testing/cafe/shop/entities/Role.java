@@ -8,21 +8,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   @Column(nullable = false)
   private String type;
 
-  public long getId() {
+  // constructor
+  public Role() {}
+
+  public Role(String type) {
+    this.type = type;
+  }
+
+  // getter and setter
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -34,10 +42,5 @@ public class Role {
     this.type = type;
   }
 
-  public Role(){}
-
-  public Role(String type) {
-    this.type = type;
-  }
 
 }

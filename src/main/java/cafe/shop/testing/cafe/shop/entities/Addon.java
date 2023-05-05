@@ -1,28 +1,31 @@
 package cafe.shop.testing.cafe.shop.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.*;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tables")
-public class Tables {
-  
+@Table(name = "addon")
+public class Addon {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
-  private String status;
+  private Double totalPrice;
 
-  public Tables() {}
+  // Constructors
 
-  public Tables(String status) {
-    this.status = status;
+  public Addon() {}
+
+  public Addon(Double totalPrice) {
+    this.totalPrice = totalPrice;
   }
+
+
+  // getter and setter
 
   public Long getId() {
     return id;
@@ -32,12 +35,14 @@ public class Tables {
     this.id = id;
   }
 
-  public String getStatus() {
-    return status;
+  public Double getTotalPrice() {
+    return totalPrice;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setTotalPrice(Double totalPrice) {
+    this.totalPrice = totalPrice;
   }
+
+  
 
 }

@@ -5,28 +5,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "size")
-public class Size {
+public class Table {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, unique = true)
-  private String size;
+  private String status;
 
-  // constructor
-  public Size() {}
 
-  public Size(String size) {
-    this.size = size;
+  // Constructor
+  public Table() {}
+
+  public Table(String status) {
+    this.status = status;
   }
 
   // getter and setter
-
   public Long getId() {
     return id;
   }
@@ -35,12 +32,12 @@ public class Size {
     this.id = id;
   }
 
-  public String getSize() {
-    return size;
+  public String getStatus() {
+    return status;
   }
 
-  public void setSize(String size) {
-    this.size = size;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   

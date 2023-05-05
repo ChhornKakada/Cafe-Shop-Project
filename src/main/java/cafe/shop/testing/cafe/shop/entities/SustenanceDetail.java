@@ -7,46 +7,47 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "drink_details")
-public class DrinkDetail {
+@Table(name = "sustenance_detail")
+public class SustenanceDetail {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @Column(nullable = false)
-  @JoinColumn(name = "category_id")
-  private Category category;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "sustenance_id")
+  private Sustenance sustenance;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @Column(nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "size_id")
   private Size size;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @Column(nullable = false)
-  @JoinColumn(name = "drink_id")
-  private Drink name;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id")
+  private Category category;
 
   @Column(nullable = false)
   private Double price;
 
   private String description;
 
-  public DrinkDetail(){}
+  // Constuctors
 
-  public DrinkDetail(Category category, Size size, Drink name, Double price, String description) {
-    this.category = category;
+  public SustenanceDetail() {}
+
+  public SustenanceDetail(Sustenance sustenance, Size size, Category category, Double price, String description) {
+    this.sustenance = sustenance;
     this.size = size;
-    this.name = name;
+    this.category = category;
     this.price = price;
     this.description = description;
   }
+
+  // getter and setter
 
   public Long getId() {
     return id;
@@ -56,12 +57,12 @@ public class DrinkDetail {
     this.id = id;
   }
 
-  public Category getCategory() {
-    return category;
+  public Sustenance getSustenance() {
+    return sustenance;
   }
 
-  public void setCategory(Category category) {
-    this.category = category;
+  public void setSustenance(Sustenance sustenance) {
+    this.sustenance = sustenance;
   }
 
   public Size getSize() {
@@ -72,12 +73,12 @@ public class DrinkDetail {
     this.size = size;
   }
 
-  public Drink getName() {
-    return name;
+  public Category getCategory() {
+    return category;
   }
 
-  public void setName(Drink name) {
-    this.name = name;
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   public Double getPrice() {
@@ -97,5 +98,6 @@ public class DrinkDetail {
   }
 
   
-  
+
+
 }

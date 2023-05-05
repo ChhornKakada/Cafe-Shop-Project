@@ -3,8 +3,6 @@ package cafe.shop.testing.cafe.shop.entities;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-// import org.mindrot.jbcrypt.BCrypt;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,49 +14,60 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity // This tells Hibernate to make a table out of this class
-@Table(name = "users")
+@Entity
+@Table(name = "employee")
 public class Employee {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
   private String name;
 
   @Column(nullable = false, unique = true)
   private String username;
 
-  private String password;
-
   private Date dob;
 
-  private String sex;
-  
+  @Column(nullable = false)
+  private String password;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "role_id")
   private Role role;
+  
+  @Column(name = "hired_date")
+  private Date hiredDate;
+
+  private String sex;
+
+  @Column(name = "last_login")
+  private Timestamp lastLogin;
 
   @Lob
   @Column(nullable = false, length = 4096)
-  private String image;
+  private String img;
 
-  private Date hired_date;
-  private Timestamp last_login;
+
+  // constructor
 
   public Employee() {}
 
-  public Employee(String name, String username, String password, Date dob, String sex, Role role, String image,
-      Date hired_date, Timestamp last_login) {
+  public Employee(String name, String username, Date dob, String password, Role role, Date hiredDate, String sex,
+      Timestamp lastLogin, String img) {
     this.name = name;
     this.username = username;
-    this.password = password;
     this.dob = dob;
-    this.sex = sex;
+    this.password = password;
     this.role = role;
-    this.image = image;
-    this.hired_date = hired_date;
-    this.last_login = last_login;
+    this.hiredDate = hiredDate;
+    this.sex = sex;
+    this.lastLogin = lastLogin;
+    this.img = img;
   }
+
+  // getter and setter
 
   public Long getId() {
     return id;
@@ -84,14 +93,6 @@ public class Employee {
     this.username = username;
   }
 
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
   public Date getDob() {
     return dob;
   }
@@ -100,12 +101,12 @@ public class Employee {
     this.dob = dob;
   }
 
-  public String getSex() {
-    return sex;
+  public String getPassword() {
+    return password;
   }
 
-  public void setSex(String sex) {
-    this.sex = sex;
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public Role getRole() {
@@ -116,30 +117,39 @@ public class Employee {
     this.role = role;
   }
 
-  public String getImage() {
-    return image;
+  public Date getHiredDate() {
+    return hiredDate;
   }
 
-  public void setImage(String image) {
-    this.image = image;
+  public void setHiredDate(Date hiredDate) {
+    this.hiredDate = hiredDate;
   }
 
-  public Date getHired_date() {
-    return hired_date;
+  public String getSex() {
+    return sex;
   }
 
-  public void setHired_date(Date hired_date) {
-    this.hired_date = hired_date;
+  public void setSex(String sex) {
+    this.sex = sex;
   }
 
-  public Timestamp getLast_login() {
-    return last_login;
+  public Timestamp getLastLogin() {
+    return lastLogin;
   }
 
-  public void setLast_login(Timestamp last_login) {
-    this.last_login = last_login;
+  public void setLastLogin(Timestamp lastLogin) {
+    this.lastLogin = lastLogin;
   }
 
+  public String getImg() {
+    return img;
+  }
+
+  public void setImg(String img) {
+    this.img = img;
+  }
+
+  
   
 
 }

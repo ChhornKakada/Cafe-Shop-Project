@@ -8,20 +8,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 public class Category {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
-  private String type;
+  @Column(nullable = false, unique = true)
+  private String name;
+
 
   public Category() {}
 
-  public Category(String type) {
-    this.type = type;
+  public Category(String name) {
+    this.name = name;
   }
 
   public Long getId() {
@@ -32,13 +33,13 @@ public class Category {
     this.id = id;
   }
 
-  public String getType() {
-    return type;
+  public String getName() {
+    return name;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setName(String name) {
+    this.name = name;
   }
 
-
+  
 }

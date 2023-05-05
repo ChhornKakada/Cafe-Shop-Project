@@ -5,29 +5,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "drinks")
-public class Drink {
+@Table(name = "toping")
+public class Toping {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String name;
 
-  @Lob
-  private String img;
+  @Column(nullable = false)
+  private Double price;
 
-  public Drink() {}
+  // construtor
 
-  public Drink(String name, String img) {
+  public Toping() {}
+
+  public Toping(String name, Double price) {
     this.name = name;
-    this.img = img;
+    this.price = price;
   }
+
+  // getter and setter
 
   public Long getId() {
     return id;
@@ -45,12 +48,12 @@ public class Drink {
     this.name = name;
   }
 
-  public String getImg() {
-    return img;
+  public Double getPrice() {
+    return price;
   }
 
-  public void setImg(String img) {
-    this.img = img;
+  public void setPrice(Double price) {
+    this.price = price;
   }
 
   

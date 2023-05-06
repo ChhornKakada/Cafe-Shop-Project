@@ -10,8 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "toping")
-public class Toping {
+@Table(name = "topping")
+public class Topping {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +25,9 @@ public class Toping {
 
   // construtor
 
-  public Toping() {}
+  public Topping() {}
 
-  public Toping(String name, BigDecimal price) {
+  public Topping(String name, BigDecimal price) {
     this.name = name;
     this.price = price;
   }

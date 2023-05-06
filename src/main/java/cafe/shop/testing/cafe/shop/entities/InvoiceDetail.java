@@ -38,14 +38,18 @@ public class InvoiceDetail {
   @Column(precision = 10, scale = 2)
   private BigDecimal totalPrice;
 
+  private String note;
+
   public InvoiceDetail() {}
 
-  public InvoiceDetail(Invoice invoice, SustenanceDetail sustDetail, Addon addon, int qty, BigDecimal totalPrice) {
+  public InvoiceDetail(Invoice invoice, SustenanceDetail sustDetail, Addon addon, int qty, BigDecimal totalPrice,
+      String note) {
     this.invoice = invoice;
     this.sustDetail = sustDetail;
     this.addon = addon;
     this.qty = qty;
     this.totalPrice = totalPrice;
+    this.note = note;
   }
 
   public Long getId() {
@@ -95,5 +99,15 @@ public class InvoiceDetail {
   public void setTotalPrice(BigDecimal totalPrice) {
     this.totalPrice = totalPrice;
   }
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
+  }
+
+  
 
 }

@@ -19,7 +19,7 @@ public class EmployeeController {
   }
 
 
-  @GetMapping({"/showEmployees", "/login"})
+  @GetMapping({"/showEmployees"})
   public String listUsers(Model model){
     model.addAttribute("employees", empService.getAllEmployees());
     return "listEmployees";

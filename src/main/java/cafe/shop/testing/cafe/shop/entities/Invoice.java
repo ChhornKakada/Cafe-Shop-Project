@@ -1,5 +1,6 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
@@ -19,11 +20,11 @@ public class Invoice {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Double totalPrice;
+  private BigDecimal totalPrice;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "table_id")
-  private Table table;
+  private Tables table;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "emp_id")
@@ -31,9 +32,88 @@ public class Invoice {
 
   private Timestamp orderedAt;
 
-  private Double cashReceived;
+  private BigDecimal cashReceived;
 
-  private Double changed;
+  private BigDecimal changed;
   
-  private Double exchangedRate;
+  private BigDecimal exchangedRate;
+
+  public Invoice() {}
+
+  public Invoice(BigDecimal totalPrice, Tables table, Employee emp, Timestamp orderedAt, BigDecimal cashReceived,
+      BigDecimal changed, BigDecimal exchangedRate) {
+    this.totalPrice = totalPrice;
+    this.table = table;
+    this.emp = emp;
+    this.orderedAt = orderedAt;
+    this.cashReceived = cashReceived;
+    this.changed = changed;
+    this.exchangedRate = exchangedRate;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public BigDecimal getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(BigDecimal totalPrice) {
+    this.totalPrice = totalPrice;
+  }
+
+  public Tables getTable() {
+    return table;
+  }
+
+  public void setTable(Tables table) {
+    this.table = table;
+  }
+
+  public Employee getEmp() {
+    return emp;
+  }
+
+  public void setEmp(Employee emp) {
+    this.emp = emp;
+  }
+
+  public Timestamp getOrderedAt() {
+    return orderedAt;
+  }
+
+  public void setOrderedAt(Timestamp orderedAt) {
+    this.orderedAt = orderedAt;
+  }
+
+  public BigDecimal getCashReceived() {
+    return cashReceived;
+  }
+
+  public void setCashReceived(BigDecimal cashReceived) {
+    this.cashReceived = cashReceived;
+  }
+
+  public BigDecimal getChanged() {
+    return changed;
+  }
+
+  public void setChanged(BigDecimal changed) {
+    this.changed = changed;
+  }
+
+  public BigDecimal getExchangedRate() {
+    return exchangedRate;
+  }
+
+  public void setExchangedRate(BigDecimal exchangedRate) {
+    this.exchangedRate = exchangedRate;
+  }
+
+  
 }

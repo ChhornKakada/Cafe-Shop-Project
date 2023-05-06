@@ -1,5 +1,7 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,18 +21,16 @@ public class Toping {
   private String name;
 
   @Column(nullable = false)
-  private Double price;
+  private BigDecimal price;
 
   // construtor
 
   public Toping() {}
 
-  public Toping(String name, Double price) {
+  public Toping(String name, BigDecimal price) {
     this.name = name;
     this.price = price;
   }
-
-  // getter and setter
 
   public Long getId() {
     return id;
@@ -48,11 +48,11 @@ public class Toping {
     this.name = name;
   }
 
-  public Double getPrice() {
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(Double price) {
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
 

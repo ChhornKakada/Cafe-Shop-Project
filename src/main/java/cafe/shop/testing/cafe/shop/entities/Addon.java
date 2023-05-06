@@ -1,5 +1,7 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,18 +16,15 @@ public class Addon {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Double totalPrice;
+  private BigDecimal totalPrice;
 
   // Constructors
 
   public Addon() {}
 
-  public Addon(Double totalPrice) {
+  public Addon(BigDecimal totalPrice) {
     this.totalPrice = totalPrice;
   }
-
-
-  // getter and setter
 
   public Long getId() {
     return id;
@@ -35,14 +34,13 @@ public class Addon {
     this.id = id;
   }
 
-  public Double getTotalPrice() {
+  public BigDecimal getTotalPrice() {
     return totalPrice;
   }
 
-  public void setTotalPrice(Double totalPrice) {
+  public void setTotalPrice(BigDecimal totalPrice) {
     this.totalPrice = totalPrice;
   }
 
-  
 
 }

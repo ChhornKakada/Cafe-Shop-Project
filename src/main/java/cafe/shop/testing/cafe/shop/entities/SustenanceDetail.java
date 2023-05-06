@@ -1,5 +1,7 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +22,7 @@ public class SustenanceDetail {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "sustenance_id")
-  private Sustenance sustenance;
+  private Sustenance sust;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "size_id")
@@ -28,26 +30,25 @@ public class SustenanceDetail {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "category_id")
-  private Category category;
+  private Category ctg;
 
   @Column(nullable = false)
-  private Double price;
+  private BigDecimal price;
 
-  private String description;
+  @Column(name = "description")
+  private String desc;
 
   // Constuctors
 
   public SustenanceDetail() {}
 
-  public SustenanceDetail(Sustenance sustenance, Size size, Category category, Double price, String description) {
-    this.sustenance = sustenance;
+  public SustenanceDetail(Sustenance sust, Size size, Category ctg, BigDecimal price, String desc) {
+    this.sust = sust;
     this.size = size;
-    this.category = category;
+    this.ctg = ctg;
     this.price = price;
-    this.description = description;
+    this.desc = desc;
   }
-
-  // getter and setter
 
   public Long getId() {
     return id;
@@ -57,12 +58,12 @@ public class SustenanceDetail {
     this.id = id;
   }
 
-  public Sustenance getSustenance() {
-    return sustenance;
+  public Sustenance getSust() {
+    return sust;
   }
 
-  public void setSustenance(Sustenance sustenance) {
-    this.sustenance = sustenance;
+  public void setSust(Sustenance sust) {
+    this.sust = sust;
   }
 
   public Size getSize() {
@@ -73,28 +74,28 @@ public class SustenanceDetail {
     this.size = size;
   }
 
-  public Category getCategory() {
-    return category;
+  public Category getCtg() {
+    return ctg;
   }
 
-  public void setCategory(Category category) {
-    this.category = category;
+  public void setCtg(Category ctg) {
+    this.ctg = ctg;
   }
 
-  public Double getPrice() {
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(Double price) {
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
 
-  public String getDescription() {
-    return description;
+  public String getDesc() {
+    return desc;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setDesc(String desc) {
+    this.desc = desc;
   }
 
   

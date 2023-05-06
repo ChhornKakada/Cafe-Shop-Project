@@ -1,13 +1,14 @@
 package cafe.shop.testing.cafe.shop.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Table {
+@Table(name = "table")
+public class Tables {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +18,9 @@ public class Table {
 
 
   // Constructor
-  public Table() {}
+  public Tables() {}
 
-  public Table(String status) {
+  public Tables(String status) {
     this.status = status;
   }
 

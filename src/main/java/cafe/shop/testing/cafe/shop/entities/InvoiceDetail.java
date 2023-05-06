@@ -2,6 +2,7 @@ package cafe.shop.testing.cafe.shop.entities;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ public class InvoiceDetail {
 
   private int qty;
 
+  @Column(precision = 10, scale = 2)
   private BigDecimal totalPrice;
 
   public InvoiceDetail() {}

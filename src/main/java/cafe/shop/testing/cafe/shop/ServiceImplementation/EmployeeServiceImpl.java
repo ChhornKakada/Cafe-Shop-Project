@@ -49,4 +49,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     empRepo.deleteById(id);
   }
 
+  @Override
+  public Employee getByUsername(String username) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getByUsername'");
+  }
+
 }

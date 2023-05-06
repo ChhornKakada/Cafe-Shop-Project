@@ -30,18 +30,18 @@ public class Sustenance {
   @Column(length = 4096)
   private String img;
 
+  @Column(name = "description")
+  private String desc;
 
-  // Constructor
   public Sustenance() {}
 
-  public Sustenance(String name, Type type, String img) {
+  public Sustenance(String name, Type type, String img, String desc) {
     this.name = name;
     this.type = type;
     this.img = img;
+    this.desc = desc;
   }
 
-
-  // getter and setter
   public Long getId() {
     return id;
   }
@@ -74,6 +74,14 @@ public class Sustenance {
     this.img = img;
   }
 
+  public String getDesc() {
+    return desc;
+  }
+
+  public void setDesc(String desc) {
+    this.desc = desc;
+  }
+  
   
 
 }

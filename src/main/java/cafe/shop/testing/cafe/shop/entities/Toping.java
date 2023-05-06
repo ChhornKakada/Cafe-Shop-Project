@@ -20,7 +20,7 @@ public class Toping {
   @Column(nullable = false, unique = true)
   private String name;
 
-  @Column(nullable = false)
+  @Column(precision = 10, scale = 2)
   private BigDecimal price;
 
   // construtor
@@ -56,6 +56,4 @@ public class Toping {
     this.price = price;
   }
 
-  
-  
 }

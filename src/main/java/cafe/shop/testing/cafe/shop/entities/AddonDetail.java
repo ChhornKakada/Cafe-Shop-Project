@@ -23,13 +23,13 @@ public class AddonDetail {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "toping_id")
-  private Toping toping;
+  private Topping topping;
 
   public AddonDetail() {}
 
-  public AddonDetail(Addon addon, Toping toping) {
+  public AddonDetail(Addon addon, Topping topping) {
     this.addon = addon;
-    this.toping = toping;
+    this.topping = topping;
   }
 
   public Long getId() {
@@ -48,12 +48,12 @@ public class AddonDetail {
     this.addon = addon;
   }
 
-  public Toping getToping() {
-    return toping;
+  public Topping getTopping() {
+    return topping;
   }
 
-  public void setToping(Toping toping) {
-    this.toping = toping;
+  public void setTopping(Topping topping) {
+    this.topping = topping;
   }
 
   

@@ -10,5 +10,6 @@ public interface EmployeeService {
 	List<Employee> getAllEmployees();
 	void save(Employee emp);
 	Employee getById(Long id);
+	Employee getByUsername(String username);
 	void deleteViaId(Long id);
 }

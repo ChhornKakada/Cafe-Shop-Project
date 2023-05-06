@@ -3,6 +3,7 @@ package cafe.shop.testing.cafe.shop.entities;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ public class Invoice {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(precision = 10, scale = 2)
   private BigDecimal totalPrice;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -32,10 +34,13 @@ public class Invoice {
 
   private Timestamp orderedAt;
 
+  @Column(precision = 10, scale = 2)
   private BigDecimal cashReceived;
 
+  @Column(precision = 10, scale = 2)
   private BigDecimal changed;
   
+  @Column(precision = 10, scale = 2)
   private BigDecimal exchangedRate;
 
   public Invoice() {}

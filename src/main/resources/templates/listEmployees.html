@@ -20,11 +20,12 @@
           <th>Name</th>
           <th>Username</th>
           <th>Sex</th>
-          <th>Role</th>
+          <th>Role</th>g
         </tr>
       </thead>
       <tbody>
-        <tr th:each="emp: ${employees}">
+        <tr th:each="emp: ${employees}"
+            th:if="${emp}">
           <td th:text="${emp.name}"></td>
           <td th:text="${emp.username}"></td>
           <td th:text="${emp.sex}"></td>

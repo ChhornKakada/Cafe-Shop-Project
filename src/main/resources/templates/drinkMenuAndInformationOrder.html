@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <title>Drink</title>
+<head>
+  <style>
+    .container {
+        display: flex;
+    }
+    .drink-list, .order-info {
+        border: 1px solid black;
+        flex: 1;
+    }
+    .drink-list, .order-info h1{
+        text-align: center;
+    }
+    .drink-item {
+        cursor: pointer;
+        display: inline-block;
+        width: calc(33.33% - 10px);
+        margin: 5px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 10px;
+        box-shadow: 0 0 5px;
+        border-radius: 10px;
+    }
+    .drink-item:hover {
+        background-color: green;
+    }
+    .order-item {
+        display: flex;
+        align-items: center;
+    }
+    .order-item-name {
+        flex: 1;
+    }
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid black;
+        padding: 20px;
+    }
+    .popup-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .close-btn {
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="drink-list"><h1>Drink list</h1>
+      <div class="drink-item" data-info="Coffee can make us sleep well 😁😀😀">Coffee</div>
+      <div class="drink-item" data-info="Best Chocolate shark that can make you cry when ever you taste it😂😁">Chocolate</div>
+      <div class="drink-item" data-info="The most sour drink that everyone like🤣😂😁">Lemon Juice</div>
+    </div>
+    <div class="order-info"><h1>Information order</h1></div>
+  </div>
+
+  <script>
+    const drinkList = document.querySelector('.drink-list');
+    const orderInfo = document.querySelector('.order-info');
+
+    drinkList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('drink-item')) {
+        const drinkName = e.target.textContent;
+        const drinkInfo = e.target.getAttribute('data-info');
+        const orderItem = document.createElement('div');
+        orderItem.classList.add('order-item');
+        orderItem.innerHTML = `
+        <span class="order-number"></span>&nbsp;
+        <span class="order-item-name">${drinkName}</span>&nbsp;
+        <span class="size">R</span>&nbsp;&nbsp;
+        <div class="quantity">
+            <button class="decrease-btn">-</button>
+            <span class="quantity-value">1</span>
+            <button class="increase-btn">+</button>
+        </div>&nbsp;
+        <button class="edit-btn">Edit</button>&nbsp;
+        <button class="delete-btn">Delete</button>
+        `;
+        orderInfo.appendChild(orderItem);
+        updateOrderNumbers();
+    }
+    });
+
+    orderInfo.addEventListener('click', (e) => {
+    const orderItem = e.target.closest('.order-item');
+    if (e.target.classList.contains('edit-btn')) {
+        const drinkName = orderItem.querySelector('.order-item-name').textContent;
+        const drinkItem = Array.from(drinkList.querySelectorAll('.drink-item')).find(item => item.textContent === drinkName);
+        const drinkInfo = drinkItem.getAttribute('data-info');
+        const size = orderItem.querySelector('.size').textContent;
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.innerHTML = `
+        <div class="popup-header">
+            <h2>${drinkName}</h2>
+            <span class="close-btn">x</span>
+        </div>
+        <p>${drinkInfo}</p>
+        <label>Size:</label>
+        <select class="size-select">
+            <option value="R"${size === 'R' ? ' selected' : ''}>R</option>
+            <option value="L"${size === 'L' ? ' selected' : ''}>L</option>
+            <option value="G"${size === 'G' ? ' selected' : ''}>G</option>
+        </select>
+        `;
+        document.body.appendChild(popup);
+    } else if (e.target.classList.contains('delete-btn')) {
+        orderItem.remove();
+        updateOrderNumbers();
+    } else if (e.target.classList.contains('increase-btn')) {
+        const quantityValue = orderItem.querySelector('.quantity-value');
+        quantityValue.textContent = parseInt(quantityValue.textContent) + 1;
+    } else if (e.target.classList.contains('decrease-btn')) {
+        const quantityValue = orderItem.querySelector('.quantity-value');
+        quantityValue.textContent = Math.max(1, parseInt(quantityValue.textContent) - 1);
+    }
+    });
+
+    document.body.addEventListener('click', (e) => {
+    if (e.target.classList.contains('close-btn')) {
+        e.target.closest('.popup').remove();
+    }
+    });
+
+    document.body.addEventListener('change', (e) => {
+    if (e.target.classList.contains('size-select')) {
+        const popup = e.target.closest('.popup');
+        const drinkNameElem = popup.querySelector('.popup-header h2');
+        const drinkName = drinkNameElem.textContent;
+        const orderItem = Array.from(orderInfo.querySelectorAll('.order-item')).find(item => item.querySelector('.order-item-name').textContent === drinkName);
+        const sizeElem = orderItem.querySelector('.size');
+        sizeElem.textContent = e.target.value;
+    }
+    });
+
+    function updateOrderNumbers() {
+    const orderNumbers = orderInfo.querySelectorAll('.order-number');
+    orderNumbers.forEach((orderNumber, index) => {
+        orderNumber.textContent = index + 1;
+    });
+    }
+  </script>
+</body>
+</html>

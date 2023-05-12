@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin</title>
+	<meta charset="UTF-8">
+	<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: 100vh;
+		}
+
+        button{
+            background-color: rgb(255, 255, 255);
+            border-radius: 12px;
+            box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+            box-sizing: border-box;
+            color: #000000;
+            cursor: pointer;
+            font-family: Poppins;
+            font-size: 1.2rem;
+            line-height: 1;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.2rem;
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
+            text-align: center;
+            text-decoration: none;
+            transition: box-shadow .2s,-webkit-box-shadow .2s;
+            white-space: nowrap;
+            border: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            }
+
+        button:hover {
+            box-shadow: #b2beff 0 0 0 3px, transparent 0 0 0 0;
+        }
+
+
+        h1{
+            font-family: 'poppins',sans-serif;
+            text-shadow: 1px 1px 5px rgb(73, 73, 73);
+            text-align: center;
+            font-size: 3em;
+        }
+
+    
+        img{
+                display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+            width: 12%;
+            padding: 0%;
+
+        
+
+        }
+
+        h2{
+            font-family: 'poppins',sans-serif;
+        }
+
+        body{
+            background: rgb(208,230,255);
+            background: radial-gradient(circle, rgba(208,230,255,1) 0%, rgba(255,224,160,1) 100%);
+        }
+
+        .modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.4);
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			max-width: 500px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+		}
+
+        .modal-content-confirm {
+			background-color: rgba(2, 149, 0, 0.84);
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			max-width: 500px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+		}
+
+        
+        .modal-content-confirm > h2{
+            color:white;
+            text-align: center;
+        }
+
+		.closeDrink {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeDrink:hover,
+		.closeDrink:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        .closeFood {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeFood:hover,
+		.closeFood:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        .closeCashier {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeCashier:hover,
+		.closeCashier:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        .closeCategory {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeCategory:hover,
+		.closeCategory:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        .closeTables {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeTables:hover,
+		.closeTables:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        .closeHistory {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.closeHistory:hover,
+		.closeHistory:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        
+
+        input{
+            width: 80vw;
+            max-width: 400px;
+            font-size: 1.5em;
+            padding: 12px 20px;
+            display: block;
+            margin: auto;
+            border-radius: 20px;
+            border: solid 1.5px #D3D3D3;
+            -webkit-transition: 1s; /* Safari */
+            transition: 1s;
+            font-family: Poppins;
+            text-align: center;
+            }
+            input[type=text]:hover{
+                box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+            }
+            input[type=text]:focus {
+                box-shadow: 0 0 5pt 2pt #D3D3D3;
+                outline-width: 0px;
+            }
+
+            select{
+            width: 10vw;
+            max-width: 400px;
+            font-size: 1em;
+            display: block;
+            margin: auto;
+            border-radius: 20px;
+            border: solid 1.5px #D3D3D3;
+            -webkit-transition: 1s; /* Safari */
+            transition: 1s;
+            font-family: Poppins;
+            text-align: center;
+            }
+            select:hover{
+                box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+            }
+            select:focus {
+                box-shadow: 0 0 5pt 2pt #D3D3D3;
+                outline-width: 0px;
+            }
+
+            ::placeholder {
+                font-family: Poppins;
+                text-align: center;
+            }
+
+            label{
+                font-family: Poppins;
+                text-align: center;
+            }
+	
+            #confirmation{
+                background-color: green;
+            }
+
+            #confirmation > p {
+                font-family: Poppins;
+                color: white;
+            }
+
+            #select-list{
+                padding: 2%;
+            }
+
+            table>h2{
+                text-align: center;
+            }
+
+            table{
+                background-color: white;
+                border-spacing: 45px;
+                border-radius: 5px;
+                
+            }
+
+            tr{
+                font-family: Poppins;
+                background-color: white;
+            }
+
+            thead>th{
+                font-family: Poppins;
+                text-shadow: 1px 1px 5px rgb(73, 73, 73);
+
+                
+            }
+
+	</style>
+
+
+</head>
+<body>
+	<div class="container">
+
+        <!--Header-->
+
+        <section>
+
+            <h1>Admin menu</h1>
+
+            <section>
+                <img src="img/coffeecup.webp">
+            </section>
+            
+        </section>
+	
+        <!--Buttons-->
+
+		<div>
+			<button id="new-cashier-btn">New Cashier</button>
+			<button id="new-drink-btn">New Drink</button>
+			<button id="new-food-btn">New Food</button>
+			<button id="new-category-btn">New Category</button>
+			<button id="new-history-btn">Orders History</button>
+			<button id="new-tables-btn">Manage Table</button>
+		</div>
+
+
+        <!--Modal window for adding food-->
+
+        <section  id="food">
+
+            <div id="new-food-modal" class="modal">
+                <div class="modal-content">
+                    <span class="closeFood" id="closeFoodButton">&times;</span>
+                    <h2>Add a new food !</h2>
+                    <form>
+                        <label for="food-code">Food's code :</label>
+                        <input type="text" id="food-code" name="food-code"><br>
+
+                        <label for="food-name">Food's name :</label>
+                        <input type="text" id="food-name" name="food-name"><br>
+
+                        <label for="food-name">Food's category :</label>
+                        <div id="select-cat-food">
+                        </div>
+    
+                        <label for="food-price">Food's price ($):</label>
+                        <input type="number" id="food-price" name="food-price"><br>
+
+                        <label for="food-note">Note:</label>
+                        <input type="text" id="food-note" name="food-note"><br>
+    
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div id="new-food-confirm" class="modal">
+                <div class="modal-content-confirm">
+                    <img src="img/check.webp">
+                    <h2>New food added!</h2>
+                </div>
+            </div>
+
+        </section>
+
+        <!--Modal window for adding drink-->
+
+        <section  id="drinks">
+
+            <div id="new-drink-modal" class="modal">
+                <div class="modal-content">
+                    <span class="closeDrink" id="closeDrinkButton">&times;</span>
+                    <h2>Add a new drink !</h2>
+                    <form>
+                        <label for="drink-code">Drink's code :</label>
+                        <input type="text" id="drink-code" name="drink-code"><br>
+
+                        <label for="drink-name">Drink's name :</label>
+                        <input type="text" id="drink-name" name="drink-name"><br>
+
+                        <label for="drink-name">Drink's category :</label>
+                        <div id="select-cat-drink">
+                        </div>
+    
+                        <label for="drink-price">Drink's price ($):</label>
+                        <input type="number" id="drink-price" name="drink-price"><br>
+
+                        <label for="drink-note">Note:</label>
+                        <input type="text" id="drink-note" name="drink-note"><br>
+    
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div id="new-drink-confirm" class="modal">
+                <div class="modal-content-confirm">
+                    <img src="img/check.webp">
+                    <h2>New drink added!</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!--Modal window for adding cashier-->
+
+        <section id="cashiers">
+
+            <div id="new-cashier-modal" class="modal">
+                <div class="modal-content">
+                    <span class="closeCashier" id="closeCashierButton">&times;</span>
+                    <h2>Add a new cashier !</h2>
+                    <form>
+                        <label for="cashier-fname">Cashier's first name :</label>
+                        <input type="text" id="cashier-fname" name="cashier-fname"><br>
+
+                        <label for="cashier-lname">Cashier's last name :</label>
+                        <input type="text" id="cashier-lname" name="cashier-lname"><br>
+
+                        <label for="cashier-sex">Cahsier's sex :</label>
+                        <select id="cashier-sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <label for="cashier-birth">Date of Birth :</label>
+                        <input type="date" id="cashier-birth" name="cashier-birth"><br>
+                            
+                        <label for="cashier-login">Cashier's login:</label>
+                        <input type="text" id="cashier-login" name="cashier-login"><br>
+
+                        <label for="cashier-password">Cashier's password:</label>
+                        <input type="password" id="cashier-password" name="cashier-password"><br>
+    
+    
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div id="new-cashier-confirm" class="modal">
+                <div class="modal-content-confirm">
+                    <img src="img/check.webp">
+                    <h2>New cashier added!</h2>
+                </div>
+            </div>
+
+        </section>
+
+        <!--Modal window for adding category-->
+
+        <section id="category">
+
+            <div id="new-category-modal" class="modal">
+                <div class="modal-content">
+                    <span class="closeCategory" id="closeCategoryButton">&times;</span>
+                    <h2>Add a new category !</h2>
+                    <form>
+                        <label for="category-fname">Category's code :</label>
+                        <input type="text" id="category-code" name="category-code"><br>
+
+                        <label for="category-lname">Category's name :</label>
+                        <input type="text" id="category-name" name="category-name"><br>
+     
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div id="new-category-confirm" class="modal">
+                <div class="modal-content-confirm">
+                    <img src="img/check.webp">
+                    <h2>New category added!</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!--Modal window for managing tables-->
+
+        <section id="tables">
+
+            <div id="new-tables-modal" class="modal">
+                <div class="modal-content">
+                    <span class="closeTables" id="closeTablesButton">&times;</span>
+                    <h2>Manage tables !</h2>
+                    <form>
+                        <label for="tables-number">Number of tables :</label>
+                        <input type="number" id="tables-number" name="tables-number"><br>
+        
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div id="new-tables-confirm" class="modal">
+                <div class="modal-content-confirm">
+                    <img src="img/check.webp">
+                    <h2>Number of tables updated !</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!--Modal window for history-->
+
+        <section id="history">
+
+        <div id="new-history-modal" class="modal">
+            <div class="modal-content">
+                <span class="closeHistory" id="closeHistoryButton">&times;</span>
+                <h2>Orders history !</h2>
+                <table id="history-table">
+                    <thead>
+                      <tr>
+                        <th>Order Number</th>
+                        <th>Table</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+
+        <div id="new-history-confirm" class="modal">
+            <div class="modal-content-confirm">
+                <img src="img/check.webp">
+                <h2>Number of tables updated !</h2>
+            </div>
+        </div>
+
+         </section>
+
+        <section id="select-list">
+
+            <label for="selectList">Choose a list to show :</label>
+            <select id="selectList">
+                <option value="choose">Choose...</option>
+                <option value="food">Food</option>
+                <option value="drink">Drinks</option>
+                <option value="cashiers">Cashiers</option>
+            </select>
+    
+            </section>
+
+        <div id="cashiertable-container">
+            <h2>Cashiers's list</h2>
+            <table id="cashier-table">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Sex</th>
+                  <th>Birthdate</th>
+                  <th>Login</th>
+                  <th>Password</th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+              </tbody>
+            </table>
+          </div>
+
+          <div id="foodtable-container">
+            <h2>Foods's list</h2>
+            <table id="food-table">
+              <thead>
+                <tr>
+                    <th>Food's Code</th>
+                    <th>Food's Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Note</th>
+                </tr>
+              </thead>
+              <tbody id="food-body">
+              </tbody>
+            </table>
+          </div>
+
+          <div id="drinktable-container">
+            <h2>Drinks's list</h2>
+            <table id="drink-table">
+              <thead>
+                <tr>
+                  <th>Drink's Code</th>
+                  <th>Drink's Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody id="drink-body">
+              </tbody>
+            </table>
+          </div>
+
+        
+        
+
+	</div>
+
+    <script>
+
+        var categoryList = [];
+
+        
+
+        //Food
+
+            //Vars
+
+            var newFoodBtn = document.getElementById("new-food-btn");
+            var newFoodModal = document.getElementById("new-food-modal");
+            var closeFoodBtn = document.getElementById("closeFoodButton");
+            var myDivFood = document.querySelector("#select-cat-food");
+            var selectCatFood = document.createElement("select");
+
+            //Buttons events
+
+            newFoodBtn.onclick = function() {
+                newFoodModal.style.display = "block";
+
+                selectCatFood.innerHTML ="";
+                
+                for (var i = 0; i < categoryList.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = categoryList[i].catCode;
+                    option.text = categoryList[i].catCode;
+                    selectCatFood.appendChild(option);
+                    
+                }
+                myDivFood.appendChild(selectCatFood);
+            }
+
+            closeFoodBtn.onclick = function() {
+                newFoodModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newFoodModal) {
+                    newFoodModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newFoodConfirm) {
+                    newFoodConfirm.style.display = "none";
+                }
+            }
+
+            //Submit and add to the list TODO add to database
+
+            var formFood = document.querySelector("#new-food-modal form");
+            var foodsList = [];
+            var foodtable = document.getElementById("foodtable-container");
+            foodtable.style.display = "none";
+            var foodTableBody = document.querySelector("#food-table tbody");
+            formFood.addEventListener("submit", function(event) {
+                event.preventDefault();
+                var foodNameInput = document.getElementById("food-name");
+                var foodPriceInput = document.getElementById("food-price");
+                var foodNoteInput = document.getElementById("food-note");
+                var foodCodeInput = document.getElementById("food-code");
+                var foodCategoryInput = document.getElementById("food-category");
+
+                var food = {
+                    code: foodCodeInput.value,
+                    name: foodNameInput.value,
+                    category: foodCategoryInput,
+                    price: foodPriceInput.value,
+                    note: foodNoteInput.value
+                };
+
+                foodsList.push(food);
+
+                var tableBody = document.querySelector("#food-table tbody");
+                var row = tableBody.insertRow();
+                var cell1 = row.insertCell();
+                var cell2 = row.insertCell();
+                var cell3 = row.insertCell();
+                var cell4 = row.insertCell();
+                var cell5 = row.insertCell();
+                cell1.textContent = food.code;
+                cell2.textContent = food.name;
+                cell3.textContent = food.category;
+                cell4.textContent = food.price;
+                cell5.textContent = food.note;
+
+
+            
+
+                foodNameInput.value = "";
+                foodPriceInput.value = "";
+                foodNoteInput.value = "";
+                foodCodeInput.value = "";
+
+                newFoodConfirm.style.display = "block";
+                setTimeout(function() {
+                    newFoodConfirm.style.opacity = "0";
+                    setTimeout(function() {
+                        newFoodConfirm.style.display = "none";
+                        newFoodConfirm.style.opacity = "1";
+                    }, 1000);
+                }, 2000);
+
+                newFoodModal.style.display = "none";
+            });
+
+
+
+        //Drink
+
+            //Vars
+
+            var newDrinkBtn = document.getElementById("new-drink-btn");
+            var newDrinkModal = document.getElementById("new-drink-modal");
+            var closeDrinkBtn = document.getElementById("closeDrinkButton");
+
+            var newFoodConfirm = document.getElementById("new-food-confirm");
+            var newDrinkConfirm = document.getElementById("new-drink-confirm");
+            var myDivDrink = document.querySelector("#select-cat-drink");
+            var selectCatDrink = document.createElement("select");
+            //Buttons event
+
+            newDrinkBtn.onclick = function() {
+                newDrinkModal.style.display = "block";
+
+                selectCatDrink.innerHTML ="";
+                
+                for (var i = 0; i < categoryList.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = categoryList[i].catCode;
+                    option.text = categoryList[i].catCode;
+                    selectCatDrink.appendChild(option);
+                    
+                }
+                myDivDrink.appendChild(selectCatDrink);
+            }
+
+            closeDrinkBtn.onclick = function() {
+                newDrinkModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newDrinkModal) {
+                    newDrinkModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newDrinkConfirm) {
+                    newDrinkConfirm.style.display = "none";
+                }
+            }
+
+            //Submit and add to the list TODO add to database
+
+            var formDrink = document.querySelector("#new-drink-modal form");
+            var drinksList = [];
+            var drinktable = document.getElementById("drinktable-container");
+            drinktable.style.display = "none";
+            var drinkTableBody = document.querySelector("#drink-table tbody");
+            formDrink.addEventListener("submit", function(event) {
+                event.preventDefault();
+                var drinkNameInput = document.getElementById("drink-name");
+                var drinkPriceInput = document.getElementById("drink-price");
+                var drinkNoteInput = document.getElementById("drink-note");
+                var drinkCodeInput = document.getElementById("drink-code");
+                var drinkCategoryInput = document.getElementById("drink-category");
+
+                var drink = {
+                    code: drinkCodeInput.value,
+                    name: drinkNameInput.value,
+                    category: drinkCategoryInput,
+                    price: drinkPriceInput.value,
+                    note: drinkNoteInput.value
+                };
+
+                drinksList.push(drink);
+
+                var tableBody = document.querySelector("#drink-table tbody");
+                var row = tableBody.insertRow();
+                var cell1 = row.insertCell();
+                var cell2 = row.insertCell();
+                var cell3 = row.insertCell();
+                var cell4 = row.insertCell();
+                var cell5 = row.insertCell();
+                cell1.textContent = drink.code;
+                cell2.textContent = drink.name;
+                cell3.textContent = drink.category;
+                cell4.textContent = drink.price;
+                cell5.textContent = drink.note;
+
+
+            
+
+                drinkNameInput.value = "";
+                drinkPriceInput.value = "";
+                drinkNoteInput.value = "";
+                drinkCodeInput.value = "";
+
+
+
+                newDrinkConfirm.style.display = "block";
+                setTimeout(function() {
+                    newDrinkConfirm.style.opacity = "0";
+                    setTimeout(function() {
+                        newDrinkConfirm.style.display = "none";
+                        newDrinkConfirm.style.opacity = "1";
+                    }, 1000);
+                }, 2000);
+
+                newDrinkModal.style.display = "none";
+            });
+
+        //Cashier
+
+            //Vars
+
+            var newCashierBtn = document.getElementById("new-cashier-btn");
+            var newCashierModal = document.getElementById("new-cashier-modal");
+            var closeCashierBtn = document.getElementById("closeCashierButton");
+
+            var newFoodConfirm = document.getElementById("new-food-confirm");
+            var newCashierConfirm = document.getElementById("new-cashier-confirm");
+
+            //Buttons event
+
+            newCashierBtn.onclick = function() {
+                newCashierModal.style.display = "block";
+            }
+
+            closeCashierBtn.onclick = function() {
+                newCashierModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newCashierModal) {
+                    newCashierModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newCashierConfirm) {
+                    newCashierConfirm.style.display = "none";
+                }
+            }
+
+            //Submit and add to the list TODO add to database
+
+            var formCashier = document.querySelector("#new-cashier-modal form");
+            var cashierList = [];
+            var cashiertable = document.getElementById("cashiertable-container");
+            cashiertable.style.display = "none";
+            var cashierTableBody = document.querySelector("#cashier-table tbody");
+
+            formCashier.addEventListener("submit", function(event) {
+                event.preventDefault();
+                var cashierFirstNameInput = document.getElementById("cashier-fname");
+                var cashierLastNameInput = document.getElementById("cashier-lname");
+                var cashierLoginInput = document.getElementById("cashier-login");
+                var cashierBirthInput = document.getElementById("cashier-birth");
+                var cashierPasswordInput = document.getElementById("cashier-password");
+                var cashierSex = document.getElementById("cashier-sex");
+
+                var cashier = {
+                    firstName: cashierFirstNameInput.value,
+                    lastName: cashierLastNameInput.value,
+                    sex: cashierSex.value,
+                    birth: cashierBirthInput.value,
+                    login: cashierLoginInput.value,
+                    password: cashierPasswordInput.value
+                };
+                
+                cashierList.push(cashier);
+
+                var tableBody = document.querySelector("#cashier-table tbody");
+                var row = tableBody.insertRow();
+                var cell1 = row.insertCell();
+                var cell2 = row.insertCell();
+                var cell3 = row.insertCell();
+                var cell4 = row.insertCell();
+                var cell5 = row.insertCell();
+                var cell6 = row.insertCell();
+                cell1.textContent = cashier.firstName;
+                cell2.textContent = cashier.lastName;
+                cell3.textContent = cashier.sex;
+                cell4.textContent = cashier.birth;
+                cell5.textContent = cashier.login;
+                cell6.textContent = cashier.password;
+
+                cashierLastNameInput.value = "";
+                cashierLoginInput.value = "";
+                cashierBirthInput.value = "";
+                cashierFirstNameInput.value = "";
+                cashierPasswordInput.value = "";
+                cashierSex.value = "";
+
+                newCashierConfirm.style.display = "block";
+                setTimeout(function() {
+                    newCashierConfirm.style.opacity = "0";
+                    setTimeout(function() {
+                        newCashierConfirm.style.display = "none";
+                        newCashierConfirm.style.opacity = "1";
+                    }, 1000);
+                }, 2000);
+
+                newCashierModal.style.display = "none";
+            });
+
+
+            var select = document.getElementById("selectList");
+
+            select.addEventListener("change", function() {
+                if (this.value === "cashiers") {
+                    cashiertable.style.display = "block";
+                    drinktable.style.display = "none";
+                    foodtable.style.display ="none";
+                } else if(this.value === "drink") {
+                    drinktable.style.display = "block";
+                    cashiertable.style.display = "none";
+                    foodtable.style.display ="none";
+                } else if(this.value === "food"){
+                    foodtable.style.display ="block";
+                    cashiertable.style.display = "none";
+                    drinktable.style.display = "none";
+                } else {
+                    foodtable.style.display ="none";
+                    cashiertable.style.display = "none";
+                    drinktable.style.display = "none";
+
+                }
+            });
+
+
+            //Category
+
+            //Vars
+
+            var newCategoryBtn = document.getElementById("new-category-btn");
+            var newCategoryModal = document.getElementById("new-category-modal");
+            var closeCategoryBtn = document.getElementById("closeCategoryButton");
+
+            var newCategoryConfirm = document.getElementById("new-category-confirm");
+
+
+            //Buttons event
+
+            newCategoryBtn.onclick = function() {
+                newCategoryModal.style.display = "block";
+            }
+
+            closeCategoryBtn.onclick = function() {
+                newCategoryModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newCategoryModal) {
+                    newCategoryModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newCategoryConfirm) {
+                    newCategoryConfirm.style.display = "none";
+                }
+            }
+
+            //Submit and add to the list TODO add to database
+
+            var formCategory = document.querySelector("#new-category-modal form");
+      
+            formCategory.addEventListener("submit", function(event) {
+                event.preventDefault();
+                var categoryNameInput = document.getElementById("category-name");
+                var categoryCodeInput = document.getElementById("category-code");
+
+                var category = {
+                    catCode: categoryNameInput.value,
+                    catName: categoryCodeInput.value,
+                };
+
+                categoryNameInput.value = "";
+                categoryCodeInput.value = "";
+
+                categoryList.push(category);
+
+                newCategoryConfirm.style.display = "block";
+                setTimeout(function() {
+                    newCategoryConfirm.style.opacity = "0";
+                    setTimeout(function() {
+                        newCategoryConfirm.style.display = "none";
+                        newCategoryConfirm.style.opacity = "1";
+                    }, 1000);
+                }, 2000);
+
+                newCategoryModal.style.display = "none";
+            });
+
+
+            //Tables
+
+            //Vars
+
+            var newTablesBtn = document.getElementById("new-tables-btn");
+            var newTablesModal = document.getElementById("new-tables-modal");
+            var closeTablesBtn = document.getElementById("closeTablesButton");
+
+            var newTablesConfirm = document.getElementById("new-tables-confirm");
+
+
+            //Buttons event
+
+            newTablesBtn.onclick = function() {
+                newTablesModal.style.display = "block";
+            }
+
+            closeTablesBtn.onclick = function() {
+                newTablesModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newTablesModal) {
+                    newTablesModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newTablesConfirm) {
+                    newTablesConfirm.style.display = "none";
+                }
+            }
+
+            //Submit and add to the list TODO add to database
+
+            var formTables = document.querySelector("#new-tables-modal form");
+      
+            formTables.addEventListener("submit", function(event) {
+                event.preventDefault();
+                var tablesNumberInput = document.getElementById("tables-number");
+
+
+
+                tablesNumberInput.value = "";
+
+
+                newTablesConfirm.style.display = "block";
+                setTimeout(function() {
+                    newTablesConfirm.style.opacity = "0";
+                    setTimeout(function() {
+                        newTablesConfirm.style.display = "none";
+                        newTablesConfirm.style.opacity = "1";
+                    }, 1000);
+                }, 2000);
+
+                newTablesModal.style.display = "none";
+            });
+
+            //History
+
+            //Vars
+
+            var newHistoryBtn = document.getElementById("new-history-btn");
+            var newHistoryModal = document.getElementById("new-history-modal");
+            var closeHistoryBtn = document.getElementById("closeHistoryButton");
+
+  
+
+
+            //Buttons event
+
+            newHistoryBtn.onclick = function() {
+                newHistoryModal.style.display = "block";
+            }
+
+            closeHistoryBtn.onclick = function() {
+                newHistoryModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newHistoryModal) {
+                    newHistoryModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == newHistoryConfirm) {
+                    newHistoryConfirm.style.display = "none";
+                }
+            }
+		
+	</script>
+
+
+
+
+</body>
+</html>

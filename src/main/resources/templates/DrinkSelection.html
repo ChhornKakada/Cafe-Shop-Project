@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .container {
+            padding-top: 30px;
+        }
+        .card-img-top {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+        .col-md-6 {
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+        .table td, .table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .order-info-title {
+            color: white;
+            background-color: black;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+          <!--Left Side-->
+          <div class="col-md-6">
+            <!-- Drink List -->
+            <h2>Drink List</h2>
+            <div class="row" id="drink-list">
+              <div class="col-sm-4">
+                <div class="card">
+                  <img src="product1.jpg" class="card-img-top" alt="Drink 1">
+                  <div class="card-body">
+                    <h5 class="card-title">Drink 1</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <img src="product2.jpg" class="card-img-top" alt="Drink 2">
+                  <div class="card-body">
+                    <h5 class="card-title">Drink 2</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <img src="product3.jpg" class="card-img-top" alt="Drink 3">
+                  <div class="card-body">
+                    <h5 class="card-title">Drink 3</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Right Side-->
+          <div class="col-md-6">
+            <!-- Order Information -->
+            <h2>Order Information</h2>
+            <table class="table">
+              <thead>
+                <tr class="order-info-title">
+                  <th>Order Number</th>
+                  <th>Name</th>
+                  <th>Size</th>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="order-info">
+                <!-- Add rows here for each drink in the order -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+        // Get the drink list and order info elements
+        const drinkList = document.querySelector("#drink-list");
+        const orderInfo = document.querySelector("#order-info");
+
+        // Listen for clicks on the drink list
+        drinkList.addEventListener("click", (e) => {
+        // Check if a drink box was clicked
+        if (e.target.closest(".card")) {
+            // Get the drink box element
+            const drinkBox = e.target.closest(".card");
+
+            // Get the drink information
+            const name = drinkBox.querySelector(".card-title").textContent;
+            // You can add more data attributes to the drink box element to store additional information about each drink
+            const size = drinkBox.getAttribute("data-size");
+            const category = drinkBox.getAttribute("data-category");
+            const price = drinkBox.getAttribute("data-price");
+
+            //order information part that get from database
+            // Create a new row for the order information
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td></td> <!-- Order number will be added later -->
+            <td>${name}</td>
+            <td>
+              <select name="size" id="size-select">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+              </select>
+            </td>
+            <td>${category}</td>
+            <td><button>-</button>1<button>+</button></td>
+            <td>${price}</td>
+            <td><button>Edit</button></td>
+            <td><button>Delete</button></td>
+            `;
+
+            // Add the new row to the order information
+            orderInfo.appendChild(row);
+
+            // Update the order numbers
+            updateOrderNumbers();
+        }
+        });
+
+        // Listen for clicks on the order info
+        orderInfo.addEventListener("click", (e) => {
+        // Check if a button was clicked
+        if (e.target.tagName === "BUTTON") {
+            // Get the row and quantity cell
+            const row = e.target.closest("tr");
+            const quantityCell = row.cells[4];
+
+            // Check which button was clicked
+            if (e.target.textContent === "+") {
+            // Increase the quantity
+            let quantity = Number(quantityCell.textContent.replace(/\D/g, ""));
+            quantity++;
+            quantityCell.innerHTML = `<button>-</button>${quantity}<button>+</button>`;
+            } else if (e.target.textContent === "-") {
+            // Decrease the quantity
+            let quantity = Number(quantityCell.textContent.replace(/\D/g, ""));
+            if (quantity > 1) {
+                quantity--;
+                quantityCell.innerHTML = `<button>-</button>${quantity}<button>+</button>`;
+            }
+            } else if (e.target.textContent === "Edit") {
+            // Edit the row (you can add your own code here)
+            } else if (e.target.textContent === "Delete") {
+            // Delete the row
+            row.remove();
+
+            // Update the order numbers
+            updateOrderNumbers();
+            }
+        }
+        });
+
+        function updateOrderNumbers() {
+        // Get all rows in the order information
+        const rows = orderInfo.querySelectorAll("tr");
+
+        // Loop through each row and update the order number
+        let orderNumber = 1;
+        rows.forEach((row) => {
+            row.cells[0].textContent = orderNumber;
+            orderNumber++;
+        });
+        }
+      </script>
+  </body>
+</html>

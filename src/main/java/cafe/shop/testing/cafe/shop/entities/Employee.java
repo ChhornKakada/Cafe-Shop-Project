@@ -33,7 +33,7 @@ public class Employee {
   @Column(nullable = false)
   private String password;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "role_id")
   private Role role;
   
@@ -65,6 +65,11 @@ public class Employee {
     this.sex = sex;
     this.lastLogin = lastLogin;
     this.img = img;
+  }
+
+  public boolean hasRole(String roleName) {
+    if (this.role.getType().equals(roleName)) return true;
+    else return false;
   }
 
   // getter and setter

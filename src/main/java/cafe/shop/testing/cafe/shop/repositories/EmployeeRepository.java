@@ -8,4 +8,6 @@ import cafe.shop.testing.cafe.shop.entities.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository <Employee, Long> {
 
+  Employee findByUsername(String username);
+
 }

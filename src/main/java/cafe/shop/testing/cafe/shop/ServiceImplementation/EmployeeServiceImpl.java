@@ -102,6 +102,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     return cashiers;
   }
 
+  // update cashier
   @Override
   public Employee updateCashier(Long id, Employee newEmp, MultipartFile file) {
     Employee existEmp = new Employee();

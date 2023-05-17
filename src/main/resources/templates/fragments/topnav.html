@@ -1,0 +1,93 @@
+<div th:fragment="navbar">
+  <!-- bg-[#11111D] -->
+  <nav class="w-56 h-full bg-[url('https://cutewallpaper.org/21/coffee-hd-wallpaper/Coffee-Wallpaper-Espresso-Coffee,-Hd-Wallpapers-.jpg')] text-slate-200 rounded-r-3xl flex-row my-auto tracking-wider"> 
+    <div class="h-[80%]">
+      <div>
+        <h1 class="text-center text-[2rem] py-10">GIC Cafe</h1>
+      </div>
+      <div>
+        <a class="flex w-[90%] mx-auto hover:rounded-lg pl-6 gap-4 py-3
+          focus:bg-white focus:text-black hover:bg-white hover:text-black hover:shadow-lg
+          hover:no-underline"
+          href="/admin/cashier">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+          </svg>        
+          <span>Cashier</span>
+        </a>
+  
+        <a class="flex w-[90%] mx-auto hover:rounded-lg pl-6 gap-4 py-3
+          focus:bg-white focus:text-black hover:bg-white hover:text-black
+          hover:no-underline"
+          href="/admin/drink">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="currentColor" class="w-6 h-6">
+            <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875
+              1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839
+              21.66 3 20.625 3H3.375z" />
+            <path fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62
+              21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163
+              3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0
+              01-.75-.75z" clip-rule="evenodd" />
+            </svg>
+            <span>Drink</span>
+        </a>
+        <a class="flex w-[90%] mx-auto hover:rounded-lg pl-6 gap-4 py-3 
+          focus:bg-white focus:text-black hover:bg-white hover:text-black
+          hover:no-underline"
+          href="/admin/food">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path d="M15 1.784l-.796.796a1.125 1.125 0 101.591 0L15 1.784zM12 1.784l-.796.796a1.125 1.125 0 101.591 0L12 1.784zM9 1.784l-.796.796a1.125 1.125 0 101.591 0L9 1.784zM9.75 7.547c.498-.02.998-.035 1.5-.042V6.75a.75.75 0 011.5 0v.755c.502.007 1.002.021 1.5.042V6.75a.75.75 0 011.5 0v.88l.307.022c1.55.117 2.693 1.427 2.693 2.946v1.018a62.182 62.182 0 00-13.5 0v-1.018c0-1.519 1.143-2.829 2.693-2.946l.307-.022v-.88a.75.75 0 011.5 0v.797zM12 12.75c-2.472 0-4.9.184-7.274.54-1.454.217-2.476 1.482-2.476 2.916v.384a4.104 4.104 0 012.585.364 2.605 2.605 0 002.33 0 4.104 4.104 0 013.67 0 2.605 2.605 0 002.33 0 4.104 4.104 0 013.67 0 2.605 2.605 0 002.33 0 4.104 4.104 0 012.585-.364v-.384c0-1.434-1.022-2.7-2.476-2.917A49.138 49.138 0 0012 12.75zM21.75 18.131a2.604 2.604 0 00-1.915.165 4.104 4.104 0 01-3.67 0 2.604 2.604 0 00-2.33 0 4.104 4.104 0 01-3.67 0 2.604 2.604 0 00-2.33 0 4.104 4.104 0 01-3.67 0 2.604 2.604 0 00-1.915-.165v2.494c0 1.036.84 1.875 1.875 1.875h15.75c1.035 0 1.875-.84 1.875-1.875v-2.494z" />
+          </svg>        
+          <span>Food</span>
+        </a>
+        <a class="flex w-[90%] mx-auto hover:rounded-lg pl-6 gap-4 
+          py-3 focus:bg-white focus:text-black hover:bg-white
+          hover:text-black hover:no-underline"
+          href="/admin/category">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z" clip-rule="evenodd" />
+          </svg>              
+          <span>Category</span>
+        </a>
+        <a class="flex w-[90%] mx-auto hover:rounded-lg pl-6 gap-4
+          py-3 focus:bg-white focus:text-black hover:bg-white
+          hover:text-black hover:no-underline"
+          href="/admin/order_history">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path d="M19.5 21a3 3 0 003-3v-4.5a3 3 0 00-3-3h-15a3 3 0 00-3 3V18a3 3 0 003 3h15zM1.5 10.146V6a3 3 0 013-3h5.379a2.25 2.25 0 011.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 013 3v1.146A4.483 4.483 0 0019.5 9h-15a4.483 4.483 0 00-3 1.146z" />
+          </svg>
+               
+          <span>Order History</span>
+        </a>
+        <a class="flex w-[90%] mx-auto hover:rounded-lg pl-6
+          gap-4 py-3 focus:bg-white focus:text-black
+          hover:bg-white hover:text-black hover:no-underline"
+          href="/admin/manage_table">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M1.5 5.625c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v12.75c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 18.375V5.625zM21 9.375A.375.375 0 0020.625 9h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5a.375.375 0 00.375-.375v-1.5zm0 3.75a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5a.375.375 0 00.375-.375v-1.5zm0 3.75a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5a.375.375 0 00.375-.375v-1.5zM10.875 18.75a.375.375 0 00.375-.375v-1.5a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5zM3.375 15h7.5a.375.375 0 00.375-.375v-1.5a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375zm0-3.75h7.5a.375.375 0 00.375-.375v-1.5A.375.375 0 0010.875 9h-7.5A.375.375 0 003 9.375v1.5c0 .207.168.375.375.375z" clip-rule="evenodd" />
+          </svg>              
+          <span>Manage Table</span>
+        </a>
+      </div>
+    </div>
+    <div class="flex justify-center items-end h-[20%] text-center bg-[#1D1B31] rounded-r-3xl">
+      <div class="text-center">
+        <p>Admin</p>
+        <div class="flex gap-1 items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" />
+          </svg>
+          <p class="text-[1.2rem]"><span sec:authentication="principal.username"></span></p>
+        </div>
+        <form th:action="@{/logout}" method="POST" class="flex gap-2 border-2 px-4 rounded-lg py-2 my-6 bg-slate-200">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-[#1D1B31]">
+            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z" clip-rule="evenodd" />
+          </svg>          
+          <input type="submit" value="Logout" / class="text-[#1D1B31]">
+        </form>
+      </div>
+    </div>
+
+  </nav>
+</div>

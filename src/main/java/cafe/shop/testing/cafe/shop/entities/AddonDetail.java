@@ -17,18 +17,13 @@ public class AddonDetail {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "addon_id")
-  private Addon addon;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "toping_id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "topping_id", referencedColumnName = "id")
   private Topping topping;
 
   public AddonDetail() {}
-
-  public AddonDetail(Addon addon, Topping topping) {
-    this.addon = addon;
+  
+  public AddonDetail(Topping topping) {
     this.topping = topping;
   }
 
@@ -40,14 +35,6 @@ public class AddonDetail {
     this.id = id;
   }
 
-  public Addon getAddon() {
-    return addon;
-  }
-
-  public void setAddon(Addon addon) {
-    this.addon = addon;
-  }
-
   public Topping getTopping() {
     return topping;
   }
@@ -56,6 +43,6 @@ public class AddonDetail {
     this.topping = topping;
   }
 
-  
+
 
 }

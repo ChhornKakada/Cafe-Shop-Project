@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous">
+    <title>Cashier</title>
+    <script type="text/javascript" th:src="@{/tailwind.js}"></script>
+    <!--Regular Datatables CSS-->
+    <link
+      href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+      rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link
+      href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"
+      rel="stylesheet">
+
+    <style>
+		/*Overrides for Tailwind CSS */
+
+		/*Form fields*/
+		.dataTables_wrapper select,
+		.dataTables_wrapper .dataTables_filter input {
+			color: #4a5568;
+			/*text-gray-700*/
+			padding-left: 1rem;
+			/*pl-4*/
+			padding-right: 1rem;
+			/*pl-4*/
+			padding-top: .5rem;
+			/*pl-2*/
+			padding-bottom: .5rem;
+			/*pl-2*/
+			line-height: 1.25;
+			/*leading-tight*/
+			border-width: 2px;
+			/*border-2*/
+			border-radius: .25rem;
+			border-color: #edf2f7;
+			/*border-gray-200*/
+			background-color: #edf2f7;
+			/*bg-gray-200*/
+		}
+
+		/*Row Hover*/
+		table.dataTable.hover tbody tr:hover,
+		table.dataTable.display tbody tr:hover {
+			background-color: #ebf4ff;
+			/*bg-indigo-100*/
+		}
+
+		/*Pagination Buttons*/
+		.dataTables_wrapper .dataTables_paginate .paginate_button {
+			font-weight: 700;
+			/*font-bold*/
+			border-radius: .25rem;
+			/*rounded*/
+			border: 1px solid transparent;
+			/*border border-transparent*/
+		}
+
+		/*Pagination Buttons - Current selected */
+		.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+			color: #fff !important;
+			/*text-white*/
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+			/*shadow*/
+			font-weight: 700;
+			/*font-bold*/
+			border-radius: .25rem;
+			/*rounded*/
+			background: #667eea !important;
+			/*bg-indigo-500*/
+			border: 1px solid transparent;
+			/*border border-transparent*/
+		}
+
+		/*Pagination Buttons - Hover */
+		.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			color: #fff !important;
+			/*text-white*/
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+			/*shadow*/
+			font-weight: 700;
+			/*font-bold*/
+			border-radius: .25rem;
+			/*rounded*/
+			background: #667eea !important;
+			/*bg-indigo-500*/
+			border: 1px solid transparent;
+			/*border border-transparent*/
+		}
+
+		/*Add padding to bottom border */
+		table.dataTable.no-footer {
+			border-bottom: 1px solid #e2e8f0;
+			/*border-b-1 border-gray-300*/
+			margin-top: 0.75em;
+			margin-bottom: 0.75em;
+		}
+
+		/*Change colour of responsive icon*/
+		table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+		table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+			background-color: #667eea !important;
+			/*bg-indigo-500*/
+		}
+	</style>
+  </head>
+  <!-- bg-[#F3F4F6] -->
+  <!-- bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1684214646~exp=1684215246~hmac=0ef2be88b11094793dad999a173b5286490463f0d1167bec48748e0b75df3436')] -->
+  <body class=" flex h-screen backdrop-blur-md bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1684214646~exp=1684215246~hmac=0ef2be88b11094793dad999a173b5286490463f0d1167bec48748e0b75df3436')]">
+    <div th:replace="/fragments/topnav :: navbar"></div>
+    <!-- component -->
+
+    <!-- start cashier homepage -->
+    <div class="w-[90%] mx-auto ">
+      <div class="pl-6 py-8 font-bold tracking-widest flex
+        justify-between">
+        <h1 class="pl-6 text-[2rem] mt-3">Cashiers</h1>
+      </div>
+      <div class="flex w-full  mr-auto">
+        <!-- List -->
+        <div class="w-[50%]">
+          <div class="pl-12  pr-6">
+            <!-- Intro -->
+            <div class=" gap-4 justify-between items-center">
+              <div class="">
+                <p>Cashier responsibilities include receiving payments and issuing receipts, gift-wrapping packages and keeping track of all cash and credit transactions. To be successful in this role, you should have previous experience in a customer service position and good knowledge of how cash registers operate.</p></div>
+              <div class="w-full flex justify-end">
+                <button class="px-6 py-2 rounded-2xl bg-blue-600 text-white mt-3"
+                onclick="openPopup()"
+                >Add New</button>
+              </div>
+              <!-- <a href="#" onclick="openPopup()">Open Popup</a> -->
+
+            </div>
+            <!-- Employees List -->
+            <div class="w-full drop-shadow-2xl rounded-lg my-4 bg-white ">
+              <!-- header -->
+              <div class="flex font-bold bg-[#1D1B31] py-2 rounded-t-lg text-slate-200">
+                <div class="w-[10%] ml-[5%]">
+                  <p>No</p>
+                </div>
+                <div class="w-[30%]">
+                  <p>Name</p>
+                </div>
+                <div class="w-[10%]">
+                  <p>Sex</p>
+                </div>
+                <div class="w-[25%]">
+                  <p>Birth date</p>
+                </div>
+                <div class="w-[15%] mr-[5%]"></div>
+              </div>
+              <!-- h-[610px] -->
+              <div class="">
+                <!-- data -->
+                <div th:each="emp, iterStat : ${employeeList}" class="flex py-2 border-b-2 bg-slate-500"
+                     th:classappend="${iterStat.index + 1}/2 == 0 ? bg-grey-200 : bg-white">
+                  <div class="w-[10%] ml-[5%]">
+                    <p th:text="${iterStat.index + 1}"></p>
+                  </div>
+                  <div class="w-[30%]">
+                    <p th:text="${emp.name}"></p>
+                  </div>
+                  <div class="w-[10%] ">
+                    <p th:text="${emp.sex}"></p>
+                  </div>
+                  <div class="w-[25%]">
+                    <p th:text="${emp.dob}"></p>
+                  </div>
+                  <!-- th:href="@{/students/{id}(id=${stu.id})} -->
+                  <div class="w-[15%] flex mr-[5%] justify-center gap-[10%]">
+                    <a th:href="@{/admin/cashier/update/{id} (id=${emp.id})}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-blue-600">
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                      </svg>  
+                    </a>
+                    <a th:href="@{/admin/cashier/{id} (id=${emp.id})}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-red-600">
+                        <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+                      </svg>  
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Profile Information -->
+        <div class="w-[50%]">
+          <div class="pr-12  pl-6">
+            <!-- card h-[786px]-->
+            <div class=" shadow-xl bg-white rounded-lg">
+              <!-- header -->
+              <div class="text-center py-2 bg-[#11111D] text-slate-200 font-bold rounded-t-lg">Casher Information</div>
+              <div class="px-6">
+                <div class="flex w-full">
+                
+                  <!-- pic -->
+                  <div class="w-1/2 pr-6 py-6">
+                    <img src="data:image/jpeg;base64," th:attrappend="src=${employeeList.get(1).img}" alt="" class="aspect-[3/4] object-cover rounded-lg shadow">
+                  </div>
+                  <!-- info -->
+                  <div class="w-1/2 py-6 flex">
+                    <div class="w-2/5">
+                      <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="font-bold  py-2">Name</p>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="font-bold  py-2">Username</p>
+                      </div>
+                     
+                      <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M12 3.75a6.715 6.715 0 00-3.722 1.118.75.75 0 11-.828-1.25 8.25 8.25 0 0112.8 6.883c0 3.014-.574 5.897-1.62 8.543a.75.75 0 01-1.395-.551A21.69 21.69 0 0018.75 10.5 6.75 6.75 0 0012 3.75zM6.157 5.739a.75.75 0 01.21 1.04A6.715 6.715 0 005.25 10.5c0 1.613-.463 3.12-1.265 4.393a.75.75 0 01-1.27-.8A6.715 6.715 0 003.75 10.5c0-1.68.503-3.246 1.367-4.55a.75.75 0 011.04-.211zM12 7.5a3 3 0 00-3 3c0 3.1-1.176 5.927-3.105 8.056a.75.75 0 11-1.112-1.008A10.459 10.459 0 007.5 10.5a4.5 4.5 0 119 0c0 .547-.022 1.09-.067 1.626a.75.75 0 01-1.495-.123c.041-.495.062-.996.062-1.503a3 3 0 00-3-3zm0 2.25a.75.75 0 01.75.75A15.69 15.69 0 018.97 20.738a.75.75 0 01-1.14-.975A14.19 14.19 0 0011.25 10.5a.75.75 0 01.75-.75zm3.239 5.183a.75.75 0 01.515.927 19.415 19.415 0 01-2.585 5.544.75.75 0 11-1.243-.84 17.912 17.912 0 002.386-5.116.75.75 0 01.927-.515z" clip-rule="evenodd" />
+                        </svg>                        
+                        <p class="font-bold  py-2">Sex</p>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM6.262 6.072a8.25 8.25 0 1010.562-.766 4.5 4.5 0 01-1.318 1.357L14.25 7.5l.165.33a.809.809 0 01-1.086 1.085l-.604-.302a1.125 1.125 0 00-1.298.21l-.132.131c-.439.44-.439 1.152 0 1.591l.296.296c.256.257.622.374.98.314l1.17-.195c.323-.054.654.036.905.245l1.33 1.108c.32.267.46.694.358 1.1a8.7 8.7 0 01-2.288 4.04l-.723.724a1.125 1.125 0 01-1.298.21l-.153-.076a1.125 1.125 0 01-.622-1.006v-1.089c0-.298-.119-.585-.33-.796l-1.347-1.347a1.125 1.125 0 01-.21-1.298L9.75 12l-1.64-1.64a6 6 0 01-1.676-3.257l-.172-1.03z" clip-rule="evenodd" />
+                        </svg>                                               
+                        <p class="font-bold  py-2">Birth Date</p>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M7.5 5.25a3 3 0 013-3h3a3 3 0 013 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0112 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 017.5 5.455V5.25zm7.5 0v.09a49.488 49.488 0 00-6 0v-.09a1.5 1.5 0 011.5-1.5h3a1.5 1.5 0 011.5 1.5zm-3 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+                          <path d="M3 18.4v-2.796a4.3 4.3 0 00.713.31A26.226 26.226 0 0012 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 01-6.477-.427C4.047 21.128 3 19.852 3 18.4z" />
+                        </svg>                                                                     
+                        <p class="font-bold  py-2">Hired Date</p>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                        </svg>                                                                                            
+                        <p class="font-bold  py-2">Last Login</p>
+                      </div>
+                    </div>
+                    <div class="w-3/5">
+                      <p class="py-2" th:text="${employeeList.get(0).name}"></p>
+                      <p class="py-2" th:text="${employeeList.get(0).username}"></p>
+                      <p class="py-2" th:if="${employeeList.get(0).sex == 'F'}">Female</p>
+                      <p class="py-2" th:unless="${employeeList.get(0).sex == 'F'}">Male</p>
+                      <p class="py-2" th:text="${employeeList.get(0).dob}">22-7-2001</p>
+                      <p class="py-2" th:text="${employeeList.get(0).hiredDate}">23-06-2023</p>
+                      <p class="py-2" th:text="${employeeList.get(0).lastLogin}"></p>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end cashier homepage -->
+
+    <!-- test popup id="popup" -->
+    <div id="popup" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <!-- card add cashier -->
+            <div class="bg-white px-12 sm:p-6 sm:pb-4 rounded-[25px]">
+
+              <div class="flex justify-end w-full">
+                <button onclick="closePopup()">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-red-600">
+                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                  </svg>                  
+                </button>
+              </div>
+              
+              <form th:action="@{/admin/cashier/new}" th:object="${employee}" method="POST"
+                enctype="multipart/form-data"
+                class="w-[460px] mx-auto mb-10 px-12 ">
+                <h1 class="text-[2rem] text-center mb-4 mt-4 tracking-wider">New Cashier</h1>
+                <p class="text-center my-4">Please spend a bit time to input the information.</p>
+                <!-- name -->
+                <div class="mt-2">
+                  <div class="text-left">Full Name</div>
+                  <input type="text" name="name" th:field = "*{name}" required placeholder="Chhorn Kakada"
+                    class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
+                </div>
+                <!-- Username -->
+                <div class="mt-2">
+                  <div class="text-left">Username</div>
+                  <input type="text" name="username" th:field = "*{username}" required placeholder="Sacda"
+                    class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
+                </div>
+                <div class="flex gap-[4%] mt-2">
+                  <!-- borthday -->
+                  <div class="w-[68%]">
+                    <div class="text-left">Birth Date</div>
+                    <input type="date"  name="dob" th:field = "*{dob}"
+                      value="2018-07-22" min="1888-01-01" max="2030-12-31"
+                      class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
+                  </div>
+                  <!-- Sex -->
+                  <div class="w-[28%]">
+                    <div class="text-left">Sex</div>
+                    <select name="sex" class="w-full pl-1 border-2 rounded-lg shadow-sm py-1 my-1 mx-auto"
+                      th:field = "*{sex}"
+                    >
+                      <option value="F">Female</option>
+                      <option value="M">Male</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <!-- Username -->
+                <div class="mt-2">
+                  <div class="text-left">Password</div>
+                  <input type="password" name="username" required placeholder="**********"
+                    th:field = "*{password}"
+                    class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
+                </div>
+                <!-- image -->
+                <div class="mt-2">
+                  <div class="text-left">Image</div>
+                  <input class="block rounded-lg my-1 cursor-pointer bg-white" name="file" type="file">
+                </div>
+                <!-- btn -->
+                <button type="submit" class="bg-[#1D1B31] text-white w-full rounded-lg h-[52px] my-6 text-[1.2rem] font-bold">Create</button>
+      
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <script>
+        function openPopup(){
+          document.getElementById("popup").style.display='block'
+        }
+        function closePopup(){
+          document.getElementById("popup").style.display='none'
+        }
+        
+      </script>
+  </body>
+</html>

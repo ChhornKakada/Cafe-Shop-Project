@@ -1,7 +1,7 @@
 package cafe.shop.testing.cafe.shop.entities;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,9 +46,8 @@ public class Employee {
   private Timestamp lastLogin;
 
   @Lob
-  @Column(nullable = false, length = 4096)
+  @Column(columnDefinition = "MEDIUMBLOB")
   private String img;
-
 
   // constructor
 
@@ -98,14 +97,6 @@ public class Employee {
     this.username = username;
   }
 
-  public Date getDob() {
-    return dob;
-  }
-
-  public void setDob(Date dob) {
-    this.dob = dob;
-  }
-
   public String getPassword() {
     return password;
   }
@@ -120,14 +111,6 @@ public class Employee {
 
   public void setRole(Role role) {
     this.role = role;
-  }
-
-  public Date getHiredDate() {
-    return hiredDate;
-  }
-
-  public void setHiredDate(Date hiredDate) {
-    this.hiredDate = hiredDate;
   }
 
   public String getSex() {
@@ -154,7 +137,20 @@ public class Employee {
     this.img = img;
   }
 
-  
-  
+  public Date getDob() {
+    return dob;
+  }
+
+  public void setDob(Date dob) {
+    this.dob = dob;
+  }
+
+  public Date getHiredDate() {
+    return hiredDate;
+  }
+
+  public void setHiredDate(Date hiredDate) {
+    this.hiredDate = hiredDate;
+  }
 
 }

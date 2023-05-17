@@ -27,7 +27,7 @@ public class Sustenance {
   private Type type;
 
   @Lob
-  @Column(length = 4096)
+  @Column(columnDefinition = "MEDIUMBLOB")
   private String img;
 
   @Column(name = "description")

@@ -2,7 +2,9 @@ package cafe.shop.testing.cafe.shop.entities;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,14 +24,18 @@ public class Invoice {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "invoice_id", referencedColumnName = "id")
+  private List <InvoiceDetail> invoiceDetails;
+
   @Column(precision = 10, scale = 2)
   private BigDecimal totalPrice;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "table_id")
   private Tables table;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "emp_id")
   private Employee emp;
 
@@ -45,8 +52,9 @@ public class Invoice {
 
   public Invoice() {}
 
-  public Invoice(BigDecimal totalPrice, Tables table, Employee emp, Timestamp orderedAt, BigDecimal cashReceived,
-      BigDecimal changed, BigDecimal exchangedRate) {
+  public Invoice(List<InvoiceDetail> invoiceDetails, BigDecimal totalPrice, Tables table, Employee emp,
+      Timestamp orderedAt, BigDecimal cashReceived, BigDecimal changed, BigDecimal exchangedRate) {
+    this.invoiceDetails = invoiceDetails;
     this.totalPrice = totalPrice;
     this.table = table;
     this.emp = emp;
@@ -62,6 +70,14 @@ public class Invoice {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public List<InvoiceDetail> getInvoiceDetails() {
+    return invoiceDetails;
+  }
+
+  public void setInvoiceDetails(List<InvoiceDetail> invoiceDetails) {
+    this.invoiceDetails = invoiceDetails;
   }
 
   public BigDecimal getTotalPrice() {
@@ -121,4 +137,5 @@ public class Invoice {
   }
 
   
+
 }

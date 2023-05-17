@@ -227,13 +227,13 @@ INSERT INTO `tables` (`id`, `status`) VALUES
 	(17, 'available'),
 	(18, 'available'),
 	(19, 'available'),
-	(20, 'available'),
-	(21, 'available'),
-	(22, 'available'),
-	(23, 'available'),
-	(24, 'available'),
-	(25, 'available'),
-	(26, 'available');
+	(20, 'unavailable'),
+	(21, 'unavailable'),
+	(22, 'unavailable'),
+	(23, 'unavailable'),
+	(24, 'unavailable'),
+	(25, 'unavailable'),
+	(26, 'unavailable');
 /*!40000 ALTER TABLE `tables` ENABLE KEYS */;
 
 -- Dumping data for table cafe_shop.topping: ~0 rows (approximately)

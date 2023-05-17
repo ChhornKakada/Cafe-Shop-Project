@@ -3,13 +3,22 @@ package cafe.shop.testing.cafe.shop.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import cafe.shop.testing.cafe.shop.entities.Employee;
+import cafe.shop.testing.cafe.shop.repositories.EmployeeRepository;
+
+@Service
+public class EmployeeService {
+	
+	@Autowired
+	public EmployeeRepository employeeRepository; 
 
 
-public interface EmployeeService {
-	List<Employee> getAllEmployees();
-	void save(Employee emp);
-	Employee getById(Long id);
-	Employee getByUsername(String username);
-	void deleteViaId(Long id);
+	// Nimith 
+
+	public List<Employee> getAllEmployees(){
+		return employeeRepository.findAll(); 
+	}
 }

@@ -22,7 +22,7 @@ public class Sustenance {
   @Column(nullable = false, unique = true)
   private String name;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "type_id")
   private Type type;
 
@@ -81,7 +81,4 @@ public class Sustenance {
   public void setDesc(String desc) {
     this.desc = desc;
   }
-  
-  
-
 }

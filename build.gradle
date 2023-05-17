@@ -30,14 +30,10 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation ('com.fasterxml.jackson.core:jackson-databind:2.14.2') {
-    	exclude group: 'org.hibernate', module: 'hibernate-core'
-	}
-
 	
-	// implementation 'org.springframework.boot:spring-boot-starter-security'
-	// implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	// implementation 'org.springframework.security:spring-security-taglibs'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	implementation 'org.springframework.security:spring-security-taglibs' 
 	// implementation 'org.mindrot:jbcrypt:0.4'
 }
 

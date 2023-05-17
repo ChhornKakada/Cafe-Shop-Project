@@ -1,5 +1,9 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "type")
-public class Type {
+public class Type implements Serializable{
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +21,7 @@ public class Type {
 
   @Column(nullable = false, unique = true)
   private String name;
+
 
   // constructor
   public Type() {}

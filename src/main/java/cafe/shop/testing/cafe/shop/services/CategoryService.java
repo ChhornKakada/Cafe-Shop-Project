@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import cafe.shop.testing.cafe.shop.entities.Category;
 import cafe.shop.testing.cafe.shop.repositories.CategoryRepository;
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Service
 public class CategoryService {

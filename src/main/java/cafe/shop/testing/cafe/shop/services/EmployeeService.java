@@ -10,8 +10,11 @@ import cafe.shop.testing.cafe.shop.entities.Employee;
 
 public interface EmployeeService {
 	List<Employee> getAllEmployees();
-	void save(Employee emp);
 	Employee getById(Long id);
 	Employee getByUsername(String username);
 	void deleteViaId(Long id);
+	Employee updateCashier(Long id, Employee newEmp, MultipartFile file);
+	List<Employee> getAllCashiers();
+	Employee addCashier(Employee emp);
+	void save(MultipartFile file, Employee emp);
 }

@@ -35,11 +35,9 @@ public class SustenanceDetail {
   @Column(precision = 10, scale = 2, nullable = false)
   private BigDecimal price;
 
-
   // Constuctors
 
   public SustenanceDetail() {}
-
 
   public SustenanceDetail(Sustenance sust, Size size, Category ctg, BigDecimal price) {
     this.sust = sust;
@@ -48,56 +46,44 @@ public class SustenanceDetail {
     this.price = price;
   }
 
-
   public Long getId() {
     return id;
   }
-
 
   public void setId(Long id) {
     this.id = id;
   }
 
-
   public Sustenance getSust() {
     return sust;
   }
-
 
   public void setSust(Sustenance sust) {
     this.sust = sust;
   }
 
-
   public Size getSize() {
     return size;
   }
-
 
   public void setSize(Size size) {
     this.size = size;
   }
 
-
   public Category getCtg() {
     return ctg;
   }
-
 
   public void setCtg(Category ctg) {
     this.ctg = ctg;
   }
 
-
   public BigDecimal getPrice() {
     return price;
   }
 
-
   public void setPrice(BigDecimal price) {
     this.price = price;
   }
-
-
 
 }

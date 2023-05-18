@@ -1,6 +1,7 @@
 package cafe.shop.testing.cafe.shop.ServiceImplementation;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
@@ -54,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     Calendar currentDate = Calendar.getInstance();
     java.util.Date dateUtil = currentDate.getTime();
     emp.setHiredDate(new java.sql.Date(dateUtil.getTime()));
+    emp.setLastUpdated(new Timestamp(System.currentTimeMillis()));
     emp.setRole(roleRepo.findById(2l).get());
     empRepo.save(emp);
   }
@@ -107,19 +109,23 @@ public class EmployeeServiceImpl implements EmployeeService {
   public Employee updateCashier(Long id, Employee newEmp, MultipartFile file) {
     Employee existEmp = new Employee();
     existEmp = empRepo.findById(id).get();
+
     existEmp.setDob(newEmp.getDob());
-    existEmp.setImg(newEmp.getImg());
     existEmp.setName(newEmp.getName());
     existEmp.setSex(newEmp.getSex());
     existEmp.setPassword(newEmp.getPassword());
-    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-    if (fileName.contains("..")) {
-      System.out.println("not a valid file");
-    }
-    try { 
-      existEmp.setImg(Base64.getEncoder().encodeToString(file.getBytes()));
-    } catch(IOException e) {
-      e.printStackTrace();
+    existEmp.setLastUpdated(new Timestamp(System.currentTimeMillis()));
+
+    if (!file.isEmpty()) {
+      String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+      if (fileName.contains("..")) {
+        System.out.println("not a valid file");
+      }
+      try { 
+        existEmp.setImg(Base64.getEncoder().encodeToString(file.getBytes()));
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
     }
     return empRepo.save(existEmp);
   }

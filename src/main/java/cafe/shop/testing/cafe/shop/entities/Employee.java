@@ -36,7 +36,7 @@ public class Employee {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "role_id")
   private Role role;
-  
+
   @Column(name = "hired_date")
   private Date hiredDate;
 
@@ -49,12 +49,16 @@ public class Employee {
   @Column(columnDefinition = "MEDIUMBLOB")
   private String img;
 
+  @Column(name = "last_update")
+  private Timestamp lastUpdated;
+
   // constructor
 
-  public Employee() {}
+  public Employee() {
+  }
 
   public Employee(String name, String username, Date dob, String password, Role role, Date hiredDate, String sex,
-      Timestamp lastLogin, String img) {
+      Timestamp lastLogin, String img, Timestamp lastUpdated) {
     this.name = name;
     this.username = username;
     this.dob = dob;
@@ -64,14 +68,15 @@ public class Employee {
     this.sex = sex;
     this.lastLogin = lastLogin;
     this.img = img;
+    this.lastUpdated = lastUpdated;
   }
 
   public boolean hasRole(String roleName) {
-    if (this.role.getType().equals(roleName)) return true;
-    else return false;
+    if (this.role.getType().equals(roleName))
+      return true;
+    else
+      return false;
   }
-
-  // getter and setter
 
   public Long getId() {
     return id;
@@ -97,6 +102,14 @@ public class Employee {
     this.username = username;
   }
 
+  public Date getDob() {
+    return dob;
+  }
+
+  public void setDob(Date dob) {
+    this.dob = dob;
+  }
+
   public String getPassword() {
     return password;
   }
@@ -111,6 +124,14 @@ public class Employee {
 
   public void setRole(Role role) {
     this.role = role;
+  }
+
+  public Date getHiredDate() {
+    return hiredDate;
+  }
+
+  public void setHiredDate(Date hiredDate) {
+    this.hiredDate = hiredDate;
   }
 
   public String getSex() {
@@ -137,20 +158,14 @@ public class Employee {
     this.img = img;
   }
 
-  public Date getDob() {
-    return dob;
+  public Timestamp getLastUpdated() {
+    return lastUpdated;
   }
 
-  public void setDob(Date dob) {
-    this.dob = dob;
+  public void setLastUpdated(Timestamp lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 
-  public Date getHiredDate() {
-    return hiredDate;
-  }
-
-  public void setHiredDate(Date hiredDate) {
-    this.hiredDate = hiredDate;
-  }
+  // getter and setter
 
 }

@@ -1,5 +1,7 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,6 +35,9 @@ public class Sustenance {
   @Column(name = "description")
   private String desc;
 
+  @Column(name = "last_update")
+  private Timestamp lastUpdated;
+
   public Sustenance() {}
 
   public Sustenance(String name, Type type, String img, String desc) {
@@ -42,6 +47,7 @@ public class Sustenance {
     this.desc = desc;
   }
 
+  
   public Long getId() {
     return id;
   }
@@ -80,5 +86,13 @@ public class Sustenance {
 
   public void setDesc(String desc) {
     this.desc = desc;
+  }
+
+  public Timestamp getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(Timestamp lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 }

@@ -62,5 +62,16 @@ public class cashierController {
     return "redirect:/admin/cashier";
   }
 
+  // view cashier detail
+  @GetMapping("admin/cashier/view/{id}")
+  public String viewCashierDetail(@PathVariable Long id, Model model) {
+    Employee emp = new Employee();
+    Employee tmpCashier = new Employee();
+    emp = empService.getById(id);
+    model.addAttribute("employeeList", empService.getAllCashiers());
+    model.addAttribute("cashier", emp);
+    model.addAttribute("prepareCashier", tmpCashier);
+    return "admin/edit_InforDatail/view_cashierDetail";
+  }
 
 }

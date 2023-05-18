@@ -45,7 +45,7 @@
     <!-- end food homepage -->
 
     <!-- test popup id="popup" -->
-    <div id="popup1" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -54,7 +54,7 @@
             <div class="bg-white px-12 sm:p-6 sm:pb-4 rounded-[25px]">
 
               <div class="flex justify-end w-full">
-                <button onclick="closePopup()">
+                <button th:onclick="changePath('/admin/food')">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-red-600">
                     <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
                   </svg>                  
@@ -62,27 +62,27 @@
               </div>
               
               <!--  -->
-              <form th:action="@{/admin/food/new}" th:object="${foodPrepare}" method="POST"
-                enctype="multipart/form-data"
+              <form th:action="@{/admin/food/update/{id} (id=*{sust.id})}" th:object="${foodDetail}" method="POST"
+                enctype="multipart/form-data" 
                 class="w-[460px] mx-auto mb-10 px-12 ">
-                <h1 class="text-[2rem] text-center mb-4 mt-4 tracking-wider">New Food</h1>
+                <h1 class="text-[2rem] text-center mb-4 mt-4 tracking-wider">Update Food</h1>
                 <p class="text-center my-4">Please spend a bit time to input the information.</p>
                 <!-- name -->
                 <div class="mt-2">
                   <div class="text-left">Name</div>
-                  <input type="text" name="name" th:field = "*{name}" required placeholder="Croissant"
+                  <input type="text" name="name" th:field="*{sust.name}" required placeholder="Croissant"
                     class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
                 </div>
                 <!-- name -->
                 <div class="mt-2">
                   <div class="text-left">Price</div>
-                  <input type="number" step="0.01"  name="foodPrice" value="0.0" required placeholder="Croissant"
+                  <input type="number" step="0.01"  name="foodPrice" th:field = "*{price}" required placeholder="Croissant"
                     class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
                 </div>
                 <!-- Description -->
                 <div class="mt-2">
                   <div class="text-left">Description</div>
-                  <input type="text" name="desc" th:field = "*{desc}" required placeholder="Acrescent-shaped pastry made..."
+                  <input type="text" name="desc" th:field = "*{sust.desc}" required placeholder="Acrescent-shaped pastry made..."
                     class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
                 </div>
                   
@@ -100,14 +100,6 @@
         </div>
       </div>
     </div>
-      <script>
-        function openPopup(){
-          document.getElementById("popup1").style.display='block'
-        }
-        function closePopup(){
-          document.getElementById("popup1").style.display='none'
-        }
-      </script>
       
       <script th:inline="javascript">
         function changePath(newPath) {

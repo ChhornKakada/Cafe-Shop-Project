@@ -1,5 +1,7 @@
 package cafe.shop.testing.cafe.shop.entities;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,16 +24,19 @@ public class Sustenance {
   @Column(nullable = false, unique = true)
   private String name;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "type_id")
   private Type type;
 
   @Lob
-  @Column(length = 4096)
+  @Column(columnDefinition = "MEDIUMBLOB")
   private String img;
 
   @Column(name = "description")
   private String desc;
+
+  @Column(name = "last_update")
+  private Timestamp lastUpdated;
 
   public Sustenance() {}
 
@@ -42,6 +47,7 @@ public class Sustenance {
     this.desc = desc;
   }
 
+  
   public Long getId() {
     return id;
   }
@@ -81,7 +87,12 @@ public class Sustenance {
   public void setDesc(String desc) {
     this.desc = desc;
   }
-  
-  
 
+  public Timestamp getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(Timestamp lastUpdated) {
+    this.lastUpdated = lastUpdated;
+  }
 }

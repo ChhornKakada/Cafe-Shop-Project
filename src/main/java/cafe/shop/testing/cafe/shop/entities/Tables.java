@@ -1,9 +1,13 @@
 package cafe.shop.testing.cafe.shop.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+
 
 @Entity
 public class Tables {
@@ -12,12 +16,13 @@ public class Tables {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String status;
+  @Enumerated(EnumType.STRING)
+  private Status status;
 
   // Constructor
   public Tables() {}
 
-  public Tables(String status) {
+  public Tables(Status status) {
     this.status = status;
   }
 
@@ -30,13 +35,11 @@ public class Tables {
     this.id = id;
   }
 
-  public String getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(Status status) {
     this.status = status;
   }
-
-  
 }

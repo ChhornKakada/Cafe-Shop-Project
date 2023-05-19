@@ -21,16 +21,12 @@ public class InvoiceDetail {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "invoice_id")
-  private Invoice invoice;
-
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "sustDetail_id")
   private SustenanceDetail sustDetail;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "addon_id")
+  @OneToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "addon_id", referencedColumnName = "id")
   private Addon addon;
 
   private int qty;
@@ -42,9 +38,7 @@ public class InvoiceDetail {
 
   public InvoiceDetail() {}
 
-  public InvoiceDetail(Invoice invoice, SustenanceDetail sustDetail, Addon addon, int qty, BigDecimal totalPrice,
-      String note) {
-    this.invoice = invoice;
+  public InvoiceDetail(SustenanceDetail sustDetail, Addon addon, int qty, BigDecimal totalPrice, String note) {
     this.sustDetail = sustDetail;
     this.addon = addon;
     this.qty = qty;
@@ -58,14 +52,6 @@ public class InvoiceDetail {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Invoice getInvoice() {
-    return invoice;
-  }
-
-  public void setInvoice(Invoice invoice) {
-    this.invoice = invoice;
   }
 
   public SustenanceDetail getSustDetail() {

@@ -91,6 +91,7 @@ public class SustenanceServiceImpl implements SustenanceService{
     susRepo.save(sus);
   }
 
+  // find sustance by name
   @Override
   public Sustenance findByName(String name) {
     return susRepo.findByName(name);

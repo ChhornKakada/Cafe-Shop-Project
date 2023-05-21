@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous">
+    <title>Drink</title>
+    <script type="text/javascript" th:src="@{/tailwind.js}"></script>
+    <!--Regular Datatables CSS-->
+    <link
+      href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+      rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link
+      href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"
+      rel="stylesheet">
+
+    <script type="text/css" th:src="@{/css/cashier_homepage.css}"></script>
+
+    <style>
+      ::-webkit-scrollbar {
+        width: 5px;
+        background-color: #F1F5F8;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background-color: #676E95;
+        border-radius: 8px;
+      } 
+    </style>
+
+  </head>
+  <!-- bg-[#F3F4F6] -->
+  <!-- bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1684214646~exp=1684215246~hmac=0ef2be88b11094793dad999a173b5286490463f0d1167bec48748e0b75df3436')] -->
+  <body class=" flex h-screen backdrop-blur-md bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1684214646~exp=1684215246~hmac=0ef2be88b11094793dad999a173b5286490463f0d1167bec48748e0b75df3436')]">
+    <div th:replace="/fragments/topnav :: navbar"></div>
+    <!-- component -->
+
+    <!-- start food homepage -->
+    <div th:replace="/fragments/drinkHomepage :: drink_homepage"></div>
+    <!-- end food homepage -->
+
+    <!-- test popup id="popup" -->
+    <div class="relative z-10 " aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <!-- card add cashier -->
+            <div class="bg-white px-12 sm:p-6 sm:pb-4 rounded-[25px]">
+
+              <div class="flex justify-end w-full">
+                <button th:onclick="changePath('/admin/drink')">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-red-600">
+                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                  </svg>                  
+                </button>
+              </div>
+              
+              <!--  -->
+              <form th:action="@{/admin/drink/update/{id} (id=${drinkDetail.id})} " th:object="${drinkDetail}" method="POST"
+                enctype="multipart/form-data"
+                class="w-[460px] mx-auto mb-10 px-12 ">
+                <h1 class="text-[2rem] text-center mb-4 mt-4 tracking-wider">Update Drink</h1>
+                <p class="text-center my-4">Please spend a bit time to input the information.</p>
+                <!-- name -->
+                <div class="mt-2">
+                  <div class="text-left">Name</div>
+                  <input type="text" name="name" th:field = "*{name}" required placeholder="Cappuccino"
+                    class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
+                </div>
+                <!-- desc -->
+                <div class="mt-2">
+                  <div class="text-left">Description</div>
+                  <input type="text" name="desc" th:field = "*{desc}" required placeholder="A traditional Italian..."
+                    class="w-full pl-3 border-2 rounded-lg py-1 shadow-sm my-1">
+                </div>
+                <!-- price -->
+                <div class="mt-2">
+                  <div class="text-left ">Price <span>for every category and size...</span></div>
+                  
+                    <div class="w-full rounded-lg mb-3 shadow-sm py-1">
+                      <div class="flex py-1 gap-[7%] rounded-t-lg bg-[#E5E5E5] px-3 font-medium">
+                        <div class="w-[13%]">Size</div>
+                        <div class="w-[22%]">Small</div>
+                        <div class="w-[22%]">Medium</div>
+                        <div class="w-[22%]">Large</div>
+                      </div>
+                      <div class="flex py-1 items-center gap-[7%] px-3">
+                        <div class="w-[13%] font-medium">Hot</div>
+                        <input type="number" step="0.01" th:field="*{price.hotSmall}" name="hotSmall" placeholder="0.0" 
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                        <input type="number" step="0.01" th:field="*{price.hotMedium}" name="hotMedium" placeholder="0.0" 
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                        <input type="number" step="0.01" th:field="*{price.hotLarge}" name="hotLarge" placeholder="0.0" 
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                      </div>
+                      <div class="flex py-1 items-center gap-[7%] bg-gray-50 px-3">
+                        <div class="w-[13%] font-medium">Iced</div>
+                        <input type="number" step="0.01" th:field="*{price.icedSmall}" name="icedSmall" placeholder="0.0" 
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                        <input type="number" step="0.01"   th:field="*{price.icedMedium}" name="icedMedium" placeholder="0.0"
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                        <input type="number" step="0.01" th:field="*{price.icedLarge}" name="icedLarge" placeholder="0.0"
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                      </div>
+                      <div class="flex py-1 items-center gap-[7%] px-3">
+                        <div class="w-[13%] font-medium">Freppe</div>
+                        <input type="number" step="0.01" th:field="*{price.freppeSmall}" name="freppeSmall" placeholder="0.0"
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                        <input type="number" step="0.01" th:field="*{price.freppeMedium}" name="freppeMedium" placeholder="0.0"
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                        <input type="number" step="0.01" th:field="*{price.freppeLarge}" name="freppeLarge" placeholder="0.0"
+                          class="pl-2 border-2 w-[22%] rounded-lg shadow-sm my-1">
+                      </div>
+                    </div>
+                </div>
+                
+                <!-- image -->
+                <div class="mt-2">
+                  <div class="text-left">Image</div>
+                  <input class="block rounded-lg my-1 cursor-pointer bg-white" name="file" type="file">
+                </div>
+                <!-- btn -->
+                <button type="submit" class="bg-[#1D1B31] text-white w-full rounded-lg h-[52px] my-6 text-[1.2rem] font-bold">Update</button>
+      
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <script th:inline="javascript">
+        function changePath(newPath) {
+            window.location.href = newPath;
+        }
+      </script>
+  </body>
+</html>

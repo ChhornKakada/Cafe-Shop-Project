@@ -74,7 +74,7 @@ public class foodController {
 
   @PostMapping("/admin/food/update/{susId}")
   // @RequestMapping(value = "admin/food/update/{susId}", method = RequestMethod.POST)
-  public String updateCashierVieId(@PathVariable Long susId, @RequestParam("file") MultipartFile file,
+  public String updateFoodVieId(@PathVariable Long susId, @RequestParam("file") MultipartFile file,
                                    @ModelAttribute("foodDetail") SustenanceDetail susDetail) {
     susDetailSer.updateFoodVieSusId(susId, susDetail, file);
     return "redirect:/admin/food/view/{susId}";

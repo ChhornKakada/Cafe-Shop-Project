@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div th:fragment="cashier_order_homepage" class="w-[90%] mx-auto px-12">
   <div class="pb-4">
     <p class=" text-[2rem] mt-3 py-4 font-bold tracking-widest">Order</p>
@@ -136,4 +137,144 @@
       </div>
     </div>
   </div>
+=======
+<div th:fragment="cashier_order_homepage" class="w-[90%] mx-auto px-12">
+  <div class="pb-4">
+    <p class=" text-[2rem] mt-3 py-4 font-bold tracking-widest">Order</p>
+    <p >A menu is a list of food and drink options offered by a restaurant. It provides descriptions and prices for each item, allowing customers to make their selections. Menus may include categories, such as appetizers, main courses, and desserts, to help customers navigate the options. They can also highlight specials or chef's recommendations. The menu design and layout vary, but they typically aim to showcase the restaurant's offerings and assist customers in making their dining choices.</p>
+    <p th:text="${tableId}"></p>
+  </div>
+
+  <!-- order card -->
+  <div class="w-full flex ">
+
+<!-- rigth side -->
+    <div class="w-1/2 border-2">
+      <!-- header -->
+      <div class="flex text-center bg-[#1D1B31] font-bold text-white rounded-t-lg">
+        <button id="drink-Button" onclick="toggleDiv('drink')" class="w-1/2  py-2 focus:bg-[#292D3E]">Drink</button>
+        <button id="food-Button" onclick="toggleDiv('food')" class="w-1/2  py-2 focus:bg-[#292D3E]">Food</button>
+      </div>
+      <!-- drink display -->
+      <div class="w-full px-[2.6%] overflow-auto bg-[#E2E8F0] rounded-lg shadow-2xl">
+        <div id="drink-section" class=" w-full flex h-[600px] flex-wrap gap-[2.66%] py-[2.66%]">
+          <!-- display data -->
+          <div id="card" th:each="drink : ${drinkList}" class="w-[23%] cursor-pointer hover:shadow-2xl hover:rounded-2xl ">
+            <!-- img -->
+            <div class="hover:border-2 border-[#1D1B31] bg-white mb-[2.66%] shadow rounded-2xl" onclick="addNewDrinkToOrder(this)" th:drinkId="${drink.id}"
+              th:name="${drink.name}">
+              <div >
+                <img src="data:image/jpeg;base64," th:attrappend="src=${drink.img}" alt="" class="aspect-[3/4]  object-cover rounded-t-2xl ">
+              </div>
+              <div th:text=${drink.name} class="text-center py-2 "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- food display -->
+      <div class="w-full px-[2.6%] overflow-auto bg-[#E2E8F0] rounded-lg shadow-2xl">
+        <div id="food-section" class=" w-full flex h-[600px] flex-wrap gap-[2.66%] py-[2.66%]">
+          <!-- display data -->
+          <div id="card" th:each="food : ${foodList}" class="w-[23%] cursor-pointer hover:shadow-2xl hover:rounded-2xl">
+            <!-- img -->
+            <div class="hover:border-2 border-[#1D1B31] bg-white mb-[2.66%] shadow rounded-2xl" onclick="addNewFoodToOrder(this)" th:foodId="${food.id}"
+              th:name="${food.name}">
+              <div >
+                <img src="data:image/jpeg;base64," th:attrappend="src=${food.img}" alt="" class="aspect-[3/4]  object-cover rounded-t-2xl ">
+              </div>
+              <div th:text=${food.name} class="text-center py-2 "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+<!-- left side -->
+    <div class="w-1/2 border-2">
+      <!-- header -->
+      <div class="text-center bg-[#1D1B31] font-bold text-white rounded-t-lg py-2">
+        <p class="focus:bg-[#292D3E]">Order Informations</p>
+      </div>
+      <!-- orders list -->
+      <div class="h-[600px] bg-white" >
+
+        <!-- order information -->
+        <div class=" h-[500px] overflow-auto">
+          <table class="table-light table-auto w-full">
+            <thead>
+              <tr class="tracking-wider">
+                <th class="sticky top-0 px-2 py-1 bg-slate-400 text-white ">No</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">Name</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">Size</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">Catgory</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">quantities</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">Unit price</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">Total price</th>
+                <th class="sticky top-0 bg-slate-400 text-white ">Action</th>
+              </tr>
+            </thead>
+            <tbody class="" id="orderList">
+              <tr th:each="orderDetail, iterStat : ${invoice.invoiceDetails}" 
+              th:classappend="${iterStat.index + 1}%2 == 0 ? 'bg-[#F9F9F9]' : 'bg-white'">
+                <td class="px-2" th:text="${iterStat.index + 1}"></td>
+                <td th:text="${orderDetail.sustDetail.sust.name}"></td>
+
+                <!-- size -->
+                <td th:if="${orderDetail.sustDetail.size} != null">
+                  <span th:switch="${orderDetail.sustDetail.size.size}">
+                      <span th:case="'Small'">S</span>
+                      <span th:case="'Medium'">M</span>
+                      <span th:case="'Large'">L</span>
+                  </span>
+                </td>
+                <td th:unless="${orderDetail.sustDetail.size} != null">-</td>
+
+                <!-- ctg -->
+                <td th:if="${orderDetail.sustDetail.ctg} != null" 
+                    th:text="${orderDetail.sustDetail.ctg.name}"></td>
+                <td th:unless="${orderDetail.sustDetail.ctg} != null">-</td>
+
+                <td th:text="${orderDetail.qty}"></td>
+                <td th:text="${orderDetail.sustDetail.price }"></td>
+                <td th:text="${orderDetail.totalPrice }"></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </div>
+          </table>
+        </div>
+
+        <div class="h-[100px] px-4 ">
+          <div class="h-[40px] flex justify-end gap-2 py-1 font-bold  border-b-2">
+            <p>Total price: </p>
+            <span class="flex">
+              <p>$</p>
+              <p th:text="${invoice.totalPrice}"></p>
+            </span>
+          </div>
+          <!-- checkout and table selection -->
+          <div class="flex w-full justify-end items-center h-[60px]">
+            <div class="flex w-full justify-end gap-4 ">
+              <!-- <button class="px-4 py-1 rounded-lg bg-[#28A745] shadow-sm">Select Table</button> -->
+              <form id="tableIdFrom" th:action="@{/cashier/order/table}" method="POST">
+                <select id="tableSelected"  onchange="submitTableForm()"
+                  class="px-4 py-1 rounded-lg shadow-sm border-2 bg-slate-100">
+                  <option th:if="${tableId} != '0'" th:text="Table + ' ' + ${tableId}"></option>
+                  <option value="0">-- Select a table --</option>
+                  <option th:each="table : ${tables}" th:if="${table.id} != ${tableId}" th:value="${table.id}" 
+                    th:text="Table + ' ' + ${table.id}">
+                  </option>
+                </select>
+              </form>
+              <button class="px-4 py-1 rounded-lg bg-[#007BFF] text-white shadow-sm" onclick="openCheckoutPopup()">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+>>>>>>> f19adfc5f2b7b8a3877f8cd6d7bf296673d32899
 </div>

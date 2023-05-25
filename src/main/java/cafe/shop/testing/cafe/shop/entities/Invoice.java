@@ -2,6 +2,7 @@ package cafe.shop.testing.cafe.shop.entities;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -26,10 +27,10 @@ public class Invoice {
 
   @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "invoice_id", referencedColumnName = "id")
-  private List <InvoiceDetail> invoiceDetails;
+  private List <InvoiceDetail> invoiceDetails = new ArrayList<>();
 
   @Column(precision = 10, scale = 2)
-  private BigDecimal totalPrice;
+  private BigDecimal totalPrice = BigDecimal.ZERO;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "table_id")
@@ -136,6 +137,9 @@ public class Invoice {
     this.exchangedRate = exchangedRate;
   }
 
-  
+  public void addNewInvoicedetail(InvoiceDetail invoiceDetail) {
+    this.totalPrice = this.totalPrice.add(invoiceDetail.getTotalPrice());
+    this.invoiceDetails.add(invoiceDetail);
+  }
 
 }

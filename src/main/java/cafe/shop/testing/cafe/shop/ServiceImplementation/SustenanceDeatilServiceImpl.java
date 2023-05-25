@@ -216,5 +216,16 @@ public class SustenanceDeatilServiceImpl implements SustenanceDetailService {
     susDatailRepo.saveAll(drinkDetails);
     return newDrink;
   }
+
+  @Override
+  public List<SustenanceDetail> getAll() {
+    return susDatailRepo.findAll();
+  }
+
+  @Override
+  public SustenanceDetail getFoodDeteailVieFoodId(long foodId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getFoodDeteailVieFoodId'");
+  }
   
 }

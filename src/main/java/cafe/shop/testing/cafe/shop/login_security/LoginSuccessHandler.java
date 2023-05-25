@@ -24,7 +24,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         if (userDetails.hasRole("Admin")) {
             redirectURL = "admin/cashier";
         } else if (userDetails.hasRole("Cashier")) {
-            redirectURL = "cashier_home";
+            redirectURL = "cashier/order";
         }
          
         response.sendRedirect(redirectURL);

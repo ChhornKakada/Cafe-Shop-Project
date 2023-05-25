@@ -79,8 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public Employee getByUsername(String username) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getByUsername'");
+    return empRepo.findByUsername(username);
   }
 
   @Override

@@ -63,6 +63,10 @@ public class Addon {
     this.totalPrice = totalPrice;
   }
 
+  public void addAnAddonDetail(AddonDetail addonDetail) {
+    this.totalPrice = this.totalPrice.add(addonDetail.getTopping().getPrice());
+    this.addonDetails.add(addonDetail);
+  }
   
 
 }

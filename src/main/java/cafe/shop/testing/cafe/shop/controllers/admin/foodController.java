@@ -44,7 +44,7 @@ public class foodController {
     model.addAttribute("foods", susService.getAllFoods());
     model.addAttribute("foodDetail", susDetailSer.getSusVieId(susId).get(0));
     model.addAttribute("foodPrepare", new Sustenance());
-    return "admin/edit_InforDatail/view_foodDetail";
+    return "admin/food";
   }
 
   @PostMapping("/admin/food/new")

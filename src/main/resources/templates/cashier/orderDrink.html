@@ -38,7 +38,7 @@
   <div th:replace="/fragments/sitebarCashier :: sitebar-cashier"></div>
 
   <!-- start cashier order homepage -->
-  <div th:replace="/fragments/cashierOrderHomepage :: cashier_order_homepage"></div>
+  <div th:replace="/cashier/fragments/cashierOrderHomepage :: cashier_order_homepage"></div>
   <!-- end cashier order homepage -->
 
 <!-- pop up order detail -->
@@ -70,17 +70,20 @@
               <!-- name -->
               <div class="mt-3">
                 <div class="text-left">Drink Name</div>
-                <input th:field="${drink.name}" th:text="${drink.name}"
-                  class="w-full pl-2 border-2 rounded-lg py-1 shadow-sm my-1">
+                <div th:text="${drink.name}"
+                  class="w-full pl-2 border-2 rounded-lg py-1 shadow-sm my-1"></div>
+                <input th:field="${drink.name}"
+                  class="hidden">
               </div>
               <!-- category and size -->
               <div class="mt-3 flex justify-between w-full gap-2">
                 <div class="w-1/3">
                   <div class="text-left">Category</div>
                   <select name="ctg" class="w-full pl-2 border-2 rounded-lg shadow-sm py-1 my-1">
-                    <option value="Hot">Hot</option>
-                    <option value="Iced">Iced</option>
-                    <option value="Frappe">Frappes</option>
+                    <!-- <option value="Hot">Hot</option> -->
+                    <option th:if="${drink.price.hotSmall} != null" value="Hot">Hot</option>
+                    <option th:if="${drink.price.icedSmall} != null" value="Iced">Iced</option>
+                    <option th:if="${drink.price.freppeSmall} != null" value="Frappe">Frappes</option>
                   </select>
                 </div>
 
@@ -132,7 +135,7 @@
               <!-- note -->
               <div class="mt-3">
                 <div class="text-left">Note</div>
-                <input type="text" name="note"  required placeholder="Sweeet 50%"
+                <input type="text" name="note"  placeholder="Sweeet 50%"
                   class="w-full pl-2 border-2 rounded-lg py-1 shadow-sm my-1">
               </div>
               

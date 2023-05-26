@@ -22,5 +22,5 @@ public interface EmployeeService {
 
 	Employee addCashier(Employee emp);
 
-	void save(MultipartFile file, Employee emp);
+	Employee save(MultipartFile file, Employee emp);
 }

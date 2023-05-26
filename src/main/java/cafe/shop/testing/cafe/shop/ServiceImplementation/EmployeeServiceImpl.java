@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   // save new studetn
   @Override
-  public void save(MultipartFile file, Employee emp) {
+  public Employee save(MultipartFile file, Employee emp) {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
     if (fileName.contains("..")) {
       System.out.println("not a valid file");
@@ -57,7 +57,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     emp.setHiredDate(new java.sql.Date(dateUtil.getTime()));
     emp.setLastUpdated(new Timestamp(System.currentTimeMillis()));
     emp.setRole(roleRepo.findById(2l).get());
-    empRepo.save(emp);
+    // Employee tmpEmp = new Employee();
+    // tmpEmp = empRepo.saveAndFlush(emp);
+    return empRepo.save(emp);
   }
 
   @Override

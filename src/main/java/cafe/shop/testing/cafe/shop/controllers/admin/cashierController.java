@@ -1,5 +1,8 @@
 package cafe.shop.testing.cafe.shop.controllers.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +26,14 @@ public class cashierController {
   }
 
   @GetMapping("/admin/cashier")
-  public String listStudents(Model model) {
-    Employee emp = new Employee();
-    model.addAttribute("employeeList", empService.getAllCashiers());
-    model.addAttribute("employee", emp);
+  public String listCashier(Model model) {
+    List <Employee> employeeList = new ArrayList<>();
+    employeeList = empService.getAllCashiers();
+    model.addAttribute("employeeList", employeeList);
+    // cashierDetail is for showing cashier info by Id
+    model.addAttribute("cashierDetail", employeeList.get(0));
+    // newCashier is a object for adding new cashier
+    model.addAttribute("newCashier", new Employee());
     return "admin/cashier";
   }
 
@@ -50,6 +57,7 @@ public class cashierController {
     Employee emp = new Employee();
     emp = empService.getById(id);
     model.addAttribute("employeeList", empService.getAllCashiers());
+    model.addAttribute("cashierDetail", empService.getById(id));
     model.addAttribute("cashier", emp);
     return "admin/edit_InforDatail/edit_cashier";
   }
@@ -59,19 +67,19 @@ public class cashierController {
   public String updateCashierVieId(@PathVariable Long id, @RequestParam("file") MultipartFile file,
                                    @ModelAttribute("cashier") Employee cashier) {
     empService.updateCashier(id, cashier, file);
-    return "redirect:/admin/cashier";
+    return "redirect:/admin/cashier/view/{id}";
   }
 
   // view cashier detail
   @GetMapping("admin/cashier/view/{id}")
   public String viewCashierDetail(@PathVariable Long id, Model model) {
-    Employee emp = new Employee();
-    Employee tmpCashier = new Employee();
-    emp = empService.getById(id);
+    // for listing all cashiers
     model.addAttribute("employeeList", empService.getAllCashiers());
-    model.addAttribute("cashier", emp);
-    model.addAttribute("prepareCashier", tmpCashier);
-    return "admin/edit_InforDatail/view_cashierDetail";
+    // cashierDetail is for showing cashier info by Id
+    model.addAttribute("cashierDetail", empService.getById(id));
+    // newCashier is a object for adding new cashier
+    model.addAttribute("newCashier", new Employee());
+    return "admin/cashier";
   }
 
 }

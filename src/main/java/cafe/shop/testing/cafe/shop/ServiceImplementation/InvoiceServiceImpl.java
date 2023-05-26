@@ -126,6 +126,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     
   }
 
+
+  // add food to order detail
   @Override
   public Invoice addAnOrderdetailFood(Long foodId, Integer qty, String note, Invoice invoice) {
     SustenanceDetail foodDetail = new SustenanceDetail();
@@ -137,10 +139,13 @@ public class InvoiceServiceImpl implements InvoiceService {
     orderDetail.setNote(note);
 
     Double totalPrice = orderDetail.getSustDetail().getPrice().doubleValue() * qty;
-    orderDetail.setTotalPrice(new BigDecimal(totalPrice));
+    BigDecimal tmpPrice = new BigDecimal(totalPrice);
+    tmpPrice = tmpPrice.setScale(2, RoundingMode.HALF_UP);
+    orderDetail.setTotalPrice(tmpPrice);
     invoice.addNewInvoicedetail(orderDetail);
     return invoice;
   }
+
 
   @Override
   public void checkout(Invoice invoice, Double cashReceived, String cashierUsername, Long tableId) {

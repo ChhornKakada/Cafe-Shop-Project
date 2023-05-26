@@ -166,19 +166,47 @@ public class SustenanceDeatilServiceImpl implements SustenanceDetailService {
     iced = ctgRepo.findById(2L).get();
     Category freppe = new Category();
     freppe = ctgRepo.findById(3L).get();
-    drinkDetails.add(new SustenanceDetail(tmpDrink, small, hot, new BigDecimal(newDrink.getPrice().getHotSmall())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, small, iced, new BigDecimal(newDrink.getPrice().getIcedSmall())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, small, freppe, new BigDecimal(newDrink.getPrice().getFreppeSmall())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, medium, hot, new BigDecimal(newDrink.getPrice().getHotMedium())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, medium, iced, new BigDecimal(newDrink.getPrice().getIcedMedium())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, medium, freppe, new BigDecimal(newDrink.getPrice().getFreppeMedium())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, large, hot, new BigDecimal(newDrink.getPrice().getHotLarge())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, large, iced, new BigDecimal(newDrink.getPrice().getIcedLarge())));
-    drinkDetails.add(new SustenanceDetail(tmpDrink, large, freppe, new BigDecimal(newDrink.getPrice().getFreppeLarge())));
+
+    if (newDrink.getPrice().getHotSmall() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, small, hot, new BigDecimal(newDrink.getPrice().getHotSmall())));
+    }
+    
+    if (newDrink.getPrice().getIcedSmall() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, small, iced, new BigDecimal(newDrink.getPrice().getIcedSmall())));
+    }
+
+    if (newDrink.getPrice().getFreppeSmall() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, small, freppe, new BigDecimal(newDrink.getPrice().getFreppeSmall())));
+    }
+
+    if (newDrink.getPrice().getHotMedium() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, medium, hot, new BigDecimal(newDrink.getPrice().getHotMedium())));
+    }
+
+    if (newDrink.getPrice().getIcedMedium() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, medium, iced, new BigDecimal(newDrink.getPrice().getIcedMedium())));
+    }
+
+    if (newDrink.getPrice().getFreppeMedium() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, medium, freppe, new BigDecimal(newDrink.getPrice().getFreppeMedium())));
+    }
+
+    if (newDrink.getPrice().getHotLarge() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, large, hot, new BigDecimal(newDrink.getPrice().getHotLarge())));
+    }
+
+    if (newDrink.getPrice().getIcedLarge() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, large, iced, new BigDecimal(newDrink.getPrice().getIcedLarge())));
+    }
+
+    if (newDrink.getPrice().getFreppeLarge() != null) {
+      drinkDetails.add(new SustenanceDetail(tmpDrink, large, freppe, new BigDecimal(newDrink.getPrice().getFreppeLarge())));
+    }
 
     for (var drinkDe : drinkDetails) {
       susDatailRepo.save(drinkDe);
     }
+    
   }
 
 

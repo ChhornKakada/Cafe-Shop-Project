@@ -54,7 +54,9 @@ public class orderController {
   @GetMapping(path = "/cashier/order/new/drink/{susId}")
   public String viewOrderDrinkCustom(@PathVariable Long susId, HttpSession session,
       Model model) {
-    model.addAttribute("drink", susService.getVieId(susId));
+    // get sustenance by id
+    // model.addAttribute("drink", susService.getVieId(susId));
+    model.addAttribute("drink", susDetailSer.getDrinkDetail(susId));
     model.addAttribute("drinkList", susService.getAllDrinks());
     model.addAttribute("invoice", session.getAttribute("invoice"));
     return "cashier/orderDrink";

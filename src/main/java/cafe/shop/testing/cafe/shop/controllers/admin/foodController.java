@@ -58,8 +58,8 @@ public class foodController {
   // detele food
   @GetMapping("/admin/food/{susId}")
   public String deleteFood(@PathVariable Long susId) {
-    susDetailSer.deleteSustenanceVieId(susId);
-    susService.deleteVieId(susId);
+    // susDetailSer.deleteSustenanceVieId(susId);
+    susService.setInactive(susId);
     return "redirect:/admin/food";
   }
 

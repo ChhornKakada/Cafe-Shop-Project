@@ -3,6 +3,8 @@ package cafe.shop.testing.cafe.shop.controllers.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +18,19 @@ import cafe.shop.testing.cafe.shop.entities.Employee;
 import cafe.shop.testing.cafe.shop.services.EmployeeService;
 
 @Controller
+@EnableMethodSecurity
 public class cashierController {
 
   private EmployeeService empService;
 
+  
   public cashierController(EmployeeService empService) {
     super();
     this.empService = empService;
   }
 
   @GetMapping("/admin/cashier")
+  // @PreAuthorize("hasRole('Admin')")
   public String listCashier(Model model) {
     List <Employee> employeeList = new ArrayList<>();
     employeeList = empService.getAllCashiers();
@@ -48,7 +53,7 @@ public class cashierController {
   // Delete cashier by ID
   @GetMapping("/admin/cashier/{id}")
   public String deleteCashier(@PathVariable Long id) {
-    empService.deleteViaId(id);
+    empService.setInactive(id);
     return "redirect:/admin/cashier";
   }
 

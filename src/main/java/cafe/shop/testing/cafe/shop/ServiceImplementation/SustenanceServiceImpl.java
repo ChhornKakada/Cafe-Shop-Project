@@ -35,7 +35,7 @@ public class SustenanceServiceImpl implements SustenanceService{
   public List<Sustenance> getAllFoods() {
     List <Sustenance> foods = new ArrayList<>();
     for (var sus : susRepo.findAll()) {
-      if (sus.getType().getName().equals("Food")) {
+      if (sus.getType().getName().equals("Food") && sus.isActive() == true) {
         foods.add(sus);
       }
         
@@ -53,7 +53,7 @@ public class SustenanceServiceImpl implements SustenanceService{
   public List<Sustenance> getAllDrinks() {
     List <Sustenance> drinks = new ArrayList<>();
     for (var sus : susRepo.findAll()) {
-      if (sus.getType().getName().equals("Drink"))
+      if (sus.getType().getName().equals("Drink") && sus.isActive() == true)
         drinks.add(sus);
     }
     return drinks;
@@ -121,6 +121,14 @@ public class SustenanceServiceImpl implements SustenanceService{
       }
     }
     return susRepo.save(oldSus);
+  }
+
+  @Override
+  public void setInactive(Long susId) {
+    Sustenance sustenance = new Sustenance();
+    sustenance = susRepo.findById(susId).get();
+    sustenance.setActive(false);
+    susRepo.save(sustenance);
   }
 
   

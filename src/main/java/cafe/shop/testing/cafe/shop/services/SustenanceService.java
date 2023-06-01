@@ -32,4 +32,8 @@ public interface SustenanceService {
     // update even if it food or drink
     Sustenance updateVieID(Long id, Sustenance newSus, MultipartFile file);
 
+    void setInactive(Long susId);
+
+    
+
 }

@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class orderController {
 
+  
   private SustenanceService susService;
   private SustenanceDetailService susDetailSer;
   private ToppingService toppingService;
@@ -35,6 +36,7 @@ public class orderController {
     this.invoiceService = invoiceService;
     this.tableService = tableService;
   }
+
 
   @GetMapping(path = "/cashier/order")
   public String viewHomepageOrder(Model model, HttpSession session) {

@@ -19,14 +19,16 @@ public class Tables {
   @Enumerated(EnumType.STRING)
   private Status status;
 
+  private Long invoice_current_id;
+
   // Constructor
   public Tables() {}
 
-  public Tables(Status status) {
+  public Tables(Status status, Long invoice_current_id) {
     this.status = status;
+    this.invoice_current_id = invoice_current_id;
   }
 
-  // getter and setter
   public Long getId() {
     return id;
   }
@@ -42,4 +44,14 @@ public class Tables {
   public void setStatus(Status status) {
     this.status = status;
   }
+
+  public Long getInvoice_current_id() {
+    return invoice_current_id;
+  }
+
+  public void setInvoice_current_id(Long invoice_current_id) {
+    this.invoice_current_id = invoice_current_id;
+  }
+
+ 
 }

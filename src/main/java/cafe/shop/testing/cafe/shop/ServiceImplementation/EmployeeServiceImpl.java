@@ -35,6 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     this.empRepo = empRepo;
   }
 
+  // get all cashier
   @Override
   public List<Employee> getAllEmployees() {
     return empRepo.findAll();
@@ -99,7 +100,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     List<Employee> cashiers = new ArrayList<>();
     for (var emp : employees) {
-      if (emp.getRole().getType().equals("Cashier"))
+      if (emp.getRole().getType().equals("Cashier") && emp.isActive() == true)
         cashiers.add(emp);
     }
     return cashiers;
@@ -114,7 +115,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     existEmp.setDob(newEmp.getDob());
     existEmp.setName(newEmp.getName());
     existEmp.setSex(newEmp.getSex());
-    existEmp.setPassword(newEmp.getPassword());
+    if (!newEmp.getPassword().isEmpty())
+      existEmp.setPassword(newEmp.getPassword());
     existEmp.setLastUpdated(new Timestamp(System.currentTimeMillis()));
 
     if (!file.isEmpty()) {
@@ -129,6 +131,15 @@ public class EmployeeServiceImpl implements EmployeeService {
       }
     }
     return empRepo.save(existEmp);
+  }
+
+  // set active to false
+  @Override
+  public Employee setInactive(Long id) {
+    Employee emp = new Employee();
+    emp = empRepo.findById(id).get();
+    emp.setActive(false);
+    return empRepo.save(emp);
   }
 
 }

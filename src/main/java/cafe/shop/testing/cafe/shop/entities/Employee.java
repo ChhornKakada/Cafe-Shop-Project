@@ -52,13 +52,17 @@ public class Employee {
   @Column(name = "last_update")
   private Timestamp lastUpdated;
 
+  private boolean isActive = true;
+
   // constructor
 
   public Employee() {
   }
 
+
+
   public Employee(String name, String username, Date dob, String password, Role role, Date hiredDate, String sex,
-      Timestamp lastLogin, String img, Timestamp lastUpdated) {
+      Timestamp lastLogin, String img, Timestamp lastUpdated, boolean isActive) {
     this.name = name;
     this.username = username;
     this.dob = dob;
@@ -69,7 +73,10 @@ public class Employee {
     this.lastLogin = lastLogin;
     this.img = img;
     this.lastUpdated = lastUpdated;
+    this.isActive = isActive;
   }
+
+
 
   public boolean hasRole(String roleName) {
     if (this.role.getType().equals(roleName))
@@ -164,6 +171,18 @@ public class Employee {
 
   public void setLastUpdated(Timestamp lastUpdated) {
     this.lastUpdated = lastUpdated;
+  }
+
+
+
+  public void setActive(boolean isActive) {
+    this.isActive = isActive;
+  }
+
+
+
+  public boolean isActive() {
+    return isActive;
   }
 
   // getter and setter

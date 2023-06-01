@@ -29,6 +29,7 @@ public class drinkController {
     this.susDetailSer = susDetailSer;
   }
 
+  // view all drinks
   @GetMapping(path = "/admin/drink")
   public String viewDrinkHomepage(Model model){
     List <Sustenance> drinkList = new ArrayList<>();
@@ -42,14 +43,16 @@ public class drinkController {
     return "admin/drink";
   }
 
+  // add new drink
   @PostMapping("/admin/drink/new")
-  public String addNewFood(@RequestParam("file") MultipartFile file,
+  public String addNewDrink(@RequestParam("file") MultipartFile file,
                            @ModelAttribute("drinkForAdd") DrinkDetail newDrink) {
     susDetailSer.addNewDrink(newDrink, file);
     return "redirect:/admin/drink";
   }
 
 
+  // view detail of a drink
   @GetMapping(path = "/admin/drink/view/{drinkId}")
   public String viewDrinkHomepage(@PathVariable Long drinkId, Model model){
     List <Sustenance> drinkList = new ArrayList<>();
@@ -63,10 +66,10 @@ public class drinkController {
     return "admin/drink";
   }
 
+  // delete a drink
   @GetMapping("/admin/drink/{susId}")
   public String deleteDrink(@PathVariable Long susId) {
-    susDetailSer.deleteSustenanceVieId(susId);
-    susService.deleteVieId(susId);
+    susService.setInactive(susId);
     return "redirect:/admin/drink";
   }
 

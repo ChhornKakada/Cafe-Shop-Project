@@ -23,4 +23,6 @@ public interface EmployeeService {
 	Employee addCashier(Employee emp);
 
 	Employee save(MultipartFile file, Employee emp);
+
+	Employee setInactive(Long id);
 }

@@ -13,7 +13,9 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
 @Entity
+
 @Table(name = "sustenance")
 public class Sustenance {
 
@@ -38,16 +40,21 @@ public class Sustenance {
   @Column(name = "last_update")
   private Timestamp lastUpdated;
 
+  private boolean isActive = true;
+
+
+
   public Sustenance() {}
 
-  public Sustenance(String name, Type type, String img, String desc) {
+  public Sustenance(String name, Type type, String img, String desc, Timestamp lastUpdated, boolean isActive) {
     this.name = name;
     this.type = type;
     this.img = img;
     this.desc = desc;
+    this.lastUpdated = lastUpdated;
+    this.isActive = isActive;
   }
 
-  
   public Long getId() {
     return id;
   }
@@ -95,4 +102,16 @@ public class Sustenance {
   public void setLastUpdated(Timestamp lastUpdated) {
     this.lastUpdated = lastUpdated;
   }
+
+  public boolean isActive() {
+    return isActive;
+  }
+
+  public void setActive(boolean isActive) {
+    this.isActive = isActive;
+  }
+
+  
+
+  
 }

@@ -46,6 +46,4 @@ public class RoleServiceImpl implements RoleService {
   public void deleteViaId(Long id) {
     roleRepo.deleteById(id);
   }
-  
-  
 }

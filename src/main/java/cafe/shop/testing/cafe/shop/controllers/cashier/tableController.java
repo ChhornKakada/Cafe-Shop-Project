@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cafe.shop.testing.cafe.shop.entities.Status;
 import cafe.shop.testing.cafe.shop.entities.Tables;
 import cafe.shop.testing.cafe.shop.services.InvoiceService;
 import cafe.shop.testing.cafe.shop.services.TableService;
@@ -17,7 +18,7 @@ import cafe.shop.testing.cafe.shop.services.TableService;
 @Controller
 public class tableController {
 
-  
+
   private TableService tableSer;
   private InvoiceService invoiceSer;
 
@@ -39,10 +40,12 @@ public class tableController {
     table = tables.get(0);
 
     // is busy means that have invoice
-    if (table.getInvoice_current_id() != null) {
+    if (table.getStatus().equals(Status.unavailable)) {
+      model.addAttribute("changeToAva", "yes");
       model.addAttribute("invoice", invoiceSer.getVieId(table.getInvoice_current_id()));
     } else {
       model.addAttribute("invoiceIds", invoiceSer.getInvoiceIdsBoughtToday());
+      model.addAttribute("changeToAva", "no");
     }
 
     model.addAttribute("table", table);
@@ -62,10 +65,12 @@ public class tableController {
     table = tableSer.getVeiId(tableId);
 
     // is busy means that have invoice
-    if (table.getInvoice_current_id() != null) {
+    if (table.getStatus().equals(Status.unavailable)) {
       model.addAttribute("invoice", invoiceSer.getVieId(table.getInvoice_current_id()));
+      model.addAttribute("changeToAva", "yes");
     } else {
       model.addAttribute("invoiceIds", invoiceSer.getInvoiceIdsBoughtToday());
+      model.addAttribute("changeToAva", "no");
     }
 
     model.addAttribute("table", table);

@@ -61,7 +61,9 @@ public class TableServiceImpl implements TableService {
    public void changeToUnavalible(Long tableId, Long invoiceId){
     Tables table = new Tables();
     table = tableRepo.findById(tableId).orElse(null);
+
     table.setInvoice_current_id(invoiceId);
+    table.setStatus(Status.unavailable);
     tableRepo.save(table);
 
     Invoice invoice = new Invoice();

@@ -14,4 +14,5 @@ public interface InvoiceService {
                            String topping2, Invoice invoice);
   Invoice addAnOrderdetailFood(Long foodId, Integer qty, String note, Invoice invoice);
   void checkout(Invoice invoice, Double cashReceived, String cashierUsername, Long tableId);
+  List<Long> getInvoiceIdsBoughtToday();
 }

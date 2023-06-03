@@ -1,0 +1,161 @@
+<div th:fragment="table_homepage" class="w-[90%] mx-auto px-12">
+  <div class>
+    <h1 class="text-[2rem] mt-3 py-8 font-bold tracking-widest">Manage Table</h1>
+    <p>View order detail with the table.</p>
+  </div>
+
+  <!-- tables -->
+  <div class="w-full flex my-4">
+
+    <!-- tables list -->
+    <div class="w-1/2 border-2">
+      <!-- header -->
+      <div
+        class="text-center bg-[#1D1B31] font-bold text-white rounded-t-lg py-2 ">
+        <p>Tables</p>
+      </div>
+      <!-- tables display -->
+      <div
+        class="w-full px-[2.6%] overflow-auto rounded-lg shadow-2xl">
+        <div id="drink-section"
+          class=" w-full flex h-[600px] flex-wrap gap-[2.66%] py-[2.66%]">
+          <!-- display data -->
+          <div th:each="table : ${tables}" onclick="viewTableDetail(this)" th:tableId="${table.id}"
+            class="w-[23%] cursor-pointer hover:shadow-2xl hover:rounded-2xl rounded-lg text-white text-[1.2rem]
+              flex justify-center items-center hover:bg-blue-500"
+            th:classappend="${table.invoice_current_id} == null ? 'bg-[#1BA345]' : 'bg-[#DE3E44]'">
+            <p th:text="${table.id}"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- table informaton -->
+    <div class="w-1/2 border-2">
+      <!-- header -->
+      <div
+        class="text-center bg-[#1D1B31] font-bold text-white rounded-t-lg py-2">
+        <p class="focus:bg-[#292D3E]">Order Informations</p>
+      </div>
+      <!-- orders list -->
+      <div class="h-[600px] bg-white px-24 py-12 border-2">
+
+        <!-- for table information -->
+        <div class="h-[500px] overflow-auto">
+          <!-- table id -->
+          <div class="w-full flex py-2 items-center">
+            <div class="w-2/5 flex gap-2 font-bold ">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd"
+                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                  clip-rule="evenodd" />
+              </svg>
+              <p>Table</p>
+            </div>
+            <div class="w-3/5 ">
+              <p th:text="${table.id}" class="text-[3rem]"></p>
+            </div>
+          </div>
+
+          <!-- table status -->
+          <div class="w-full flex items-center py-2">
+            <div class="w-2/5 flex gap-2 font-bold">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd"
+                  d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"
+                  clip-rule="evenodd" />
+              </svg>
+              <p>Status</p>
+            </div>
+            <div class="w-3/5">
+              <p th:text="${table.status}"></p>
+            </div>
+          </div>
+          <!-- end table status -->
+
+          <!-- if have invoice -->
+          <div th:if="${table.invoice_current_id} != null">
+            <!-- invoice id -->
+            <div class="w-full flex items-center py-2">
+              <div class="w-2/5 flex gap-2 font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                  fill="currentColor" class="w-6 h-6">
+                  <path fill-rule="evenodd"
+                    d="M11.097 1.515a.75.75 0 01.589.882L10.666 7.5h4.47l1.079-5.397a.75.75 0 111.47.294L16.665 7.5h3.585a.75.75 0 010 1.5h-3.885l-1.2 6h3.585a.75.75 0 010 1.5h-3.885l-1.08 5.397a.75.75 0 11-1.47-.294l1.02-5.103h-4.47l-1.08 5.397a.75.75 0 01-1.47-.294l1.02-5.103H3.75a.75.75 0 110-1.5h3.885l1.2-6H5.25a.75.75 0 010-1.5h3.885l1.08-5.397a.75.75 0 01.882-.588zM10.365 9l-1.2 6h4.47l1.2-6h-4.47z"
+                    clip-rule="evenodd" />
+                </svg>
+                <p>Invoice ID</p>
+              </div>
+              <div class="w-3/5">
+                <p th:text="${invoice.id}"></p>
+              </div>
+            </div>
+
+            <!-- orders -->
+            <div class="w-full flex items-start py-2">
+              <div class="w-2/5 flex gap-2 font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                  fill="currentColor" class="w-6 h-6">
+                  <path
+                    d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
+                  <path
+                    d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
+                </svg>
+                <p>Orders</p>
+              </div>
+              <div class="w-3/5">
+                <div th:each="order : ${invoice.invoiceDetails}">
+                  <div th:if="${order.sustDetail.ctg.name} != null"
+                    class="flex">
+                    <p th:text="${order.sustDetail.sust.name}"></p>
+                    <p>&nbsp;&#40;</p>
+                    <p th:text="${order.sustDetail.ctg.name} "></p>
+                    <p>-</p>
+                    <p th:text="${order.sustDetail.size.size} "></p>
+                    <p>&nbsp; x </p>
+                    <p th:text="${order.qty} "></p>
+                    <p>&#41;</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+            <!-- end invoice -->
+          </div>
+
+        </div>
+        <!-- change status -->
+        <div class="h-[100px] flex justify-end items-start">
+          <!-- if admin  -->
+          <div th:if="${isCashier == 'yes'}">
+            <form action="${cashier/tables/changeToAvailable/{tableId} (tableId=${table.id})}" method="POST" 
+            th:if="${table.invoice_current_id} != null"  th:object="${table}" >
+              <button 
+              class="bg-[#1D1B31] border-2 text-white px-4 rounded-lg text-[1.2rem] font-bold">Change to available</button>
+            </form>
+            
+            <form action="#" th:object="${table}"  method="POST" id="tableForm">
+              <input type="text" th:value="${table.id}" class="hidden" id="tableId">
+              <select th:if="${table.invoice_current_id} == null"
+              class="px-4 py-1 rounded-lg shadow-sm border-2 bg-slate-100"
+              onchange="changeToUnavailable()" 
+              id = "invoiceSelected">
+              <option value="0">Change to unavailable</option>
+              <option th:each="id : ${invoiceIds}" th:value="${id}" 
+                th:text="Invoice + ' ' + No + ' ' + ${id}">
+              </option>
+            </select>
+            </form>
+          </div>
+          <!-- if cashier -->
+        </div>
+      </div>
+    </div>
+    <!-- end right side -->
+  </div>
+
+</div>

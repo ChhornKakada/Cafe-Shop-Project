@@ -9,5 +9,7 @@ public interface TableService {
     Tables getVeiId(Long id);
     List <Tables> getAvailables();
     void triggerStatus(Long id);
+    List <Tables> getAllTables();
 
+    void changeToUnavalible(Long tableID, Long invoiceId);
 }

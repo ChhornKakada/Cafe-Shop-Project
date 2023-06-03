@@ -2,6 +2,7 @@ package cafe.shop.testing.cafe.shop.ServiceImplementation;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,14 @@ import cafe.shop.testing.cafe.shop.entities.Topping;
 import cafe.shop.testing.cafe.shop.repositories.AddonRepository;
 import cafe.shop.testing.cafe.shop.repositories.EmployeeRepository;
 import cafe.shop.testing.cafe.shop.repositories.InvoiceRepository;
+import cafe.shop.testing.cafe.shop.repositories.TableRepository;
 import cafe.shop.testing.cafe.shop.services.InvoiceService;
 import cafe.shop.testing.cafe.shop.services.SustenanceDetailService;
 import cafe.shop.testing.cafe.shop.services.TableService;
 import cafe.shop.testing.cafe.shop.services.ToppingService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -37,8 +42,13 @@ public class InvoiceServiceImpl implements InvoiceService {
   private ToppingService toppingSer;
   private AddonRepository addonRepo;
 
+  @PersistenceContext
+  private EntityManager entityManager;
+  private TableRepository tableRepo;
+
   public InvoiceServiceImpl(InvoiceRepository invoiceRepo, TableService tableService, EmployeeRepository empRepo,
-      SustenanceDetailService susDetailService, ToppingService toppingSer, AddonRepository addonRepo) {
+      SustenanceDetailService susDetailService, ToppingService toppingSer, AddonRepository addonRepo,
+      EntityManager entityManager, TableRepository tableRepo) {
     super();
     this.invoiceRepo = invoiceRepo;
     this.tableService = tableService;
@@ -46,6 +56,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     this.susDetailService = susDetailService;
     this.toppingSer = toppingSer;
     this.addonRepo = addonRepo;
+    this.entityManager = entityManager;
+    this.tableRepo = tableRepo;
   }
 
   @Override
@@ -175,7 +187,23 @@ public class InvoiceServiceImpl implements InvoiceService {
       }
     }
 
-    invoiceRepo.save(invoice);
+    Invoice invoiceTmp = new Invoice();
+    invoiceTmp = invoiceRepo.save(invoice);
+
+    if (table != null) {
+      table.setInvoice_current_id(invoiceTmp.getId());
+      tableRepo.save(table);
+    }
+  }
+  @Override
+  public List<Long> getInvoiceIdsBoughtToday() {
+    // orderedAt match of the class in java not column in sql
+    String jpql = "SELECT i.id FROM Invoice i WHERE DATE(i.orderedAt) = :today AND i.table IS NULL";
+    TypedQuery<Long> query = entityManager.createQuery(jpql, Long.class);
+    query.setParameter("today", new Date(System.currentTimeMillis()));
+    List<Long> invoiceIds = query.getResultList();
+
+    return invoiceIds;
   }
   
 }

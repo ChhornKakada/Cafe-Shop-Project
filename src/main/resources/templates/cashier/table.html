@@ -35,11 +35,28 @@
 
 </head>
 <body class=" flex h-screen backdrop-blur-md bg-[url('https://img.freepik.com/free-photo/white-painted-wall-texture-background_53876-138197.jpg?w=900&t=st=1684214646~exp=1684215246~hmac=0ef2be88b11094793dad999a173b5286490463f0d1167bec48748e0b75df3436')]">
-  <div th:replace="/fragments/sitebarCashier :: sitebar-cashier"></div>
+ <!-- start component -->
+ <div th:replace="/fragments/sitebarCashier :: sitebar-cashier"></div>
+ <!-- component -->
 
-  <!-- start new homepage table -->
-  <div class="w-full h-full flex justify-center items-center">
-    <div class="text-7xl">Comming soon...</div>
-  </div>
-  <!-- end new homepage table -->
+ <!-- start table dashboard -->
+ <div th:replace="/fragments/tableHomepage :: table_homepage"></div>
+ <!-- end table homepage -->
+
+  <script>
+    function viewTableDetail(table) {
+      var tableId = table.getAttribute('tableId');
+      window.location.href = "/cashier/tables/" + tableId;
+    }
+
+
+    function changeToUnavailable() {
+      var TableId = document.getElementById('tableId').value;
+      var selectedOption = document.getElementById('invoiceSelected').value;  
+      var form = document.getElementById('tableForm');
+      form.action = '/cashier/tables/updateToUnavailable/' + selectedOption + "/" + TableId;
+      form.submit();
+    }
+    
+  </script>
 </body>

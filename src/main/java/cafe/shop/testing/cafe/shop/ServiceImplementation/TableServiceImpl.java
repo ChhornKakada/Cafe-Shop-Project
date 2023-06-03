@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cafe.shop.testing.cafe.shop.entities.Tables;
+import cafe.shop.testing.cafe.shop.entities.Invoice;
 import cafe.shop.testing.cafe.shop.entities.Status;
+import cafe.shop.testing.cafe.shop.entities.Tables;
+import cafe.shop.testing.cafe.shop.repositories.InvoiceRepository;
 import cafe.shop.testing.cafe.shop.repositories.TableRepository;
 import cafe.shop.testing.cafe.shop.services.TableService;
 
@@ -14,10 +16,12 @@ import cafe.shop.testing.cafe.shop.services.TableService;
 public class TableServiceImpl implements TableService {
 
   private TableRepository tableRepo;
+  private InvoiceRepository invoiceRepo;
 
-  public TableServiceImpl(TableRepository tableRepo) {
+  public TableServiceImpl(TableRepository tableRepo, InvoiceRepository invoiceRepo) {
     super();
     this.tableRepo = tableRepo;
+    this.invoiceRepo = invoiceRepo;
   }
 
   @Override
@@ -47,5 +51,22 @@ public class TableServiceImpl implements TableService {
       tableRepo.save(table);
     }
   }
-  
+
+  @Override
+  public List<Tables> getAllTables() {
+    return tableRepo.findAll();
+  }
+
+   @Override
+   public void changeToUnavalible(Long tableId, Long invoiceId){
+    Tables table = new Tables();
+    table = tableRepo.findById(tableId).orElse(null);
+    table.setInvoice_current_id(invoiceId);
+    tableRepo.save(table);
+
+    Invoice invoice = new Invoice();
+    invoice = invoiceRepo.findById(invoiceId).orElse(null);
+    invoice.setTable(table);
+    invoiceRepo.save(invoice);
+   }
 }

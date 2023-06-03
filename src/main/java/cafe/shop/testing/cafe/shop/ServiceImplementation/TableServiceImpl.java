@@ -69,4 +69,13 @@ public class TableServiceImpl implements TableService {
     invoice.setTable(table);
     invoiceRepo.save(invoice);
    }
+
+  @Override
+  public void changeToAvalible(Long tableId) {
+    Tables table = new Tables();
+    table = tableRepo.findById(tableId).orElse(null);
+    table.setInvoice_current_id(null);
+    table.setStatus(Status.available);
+    tableRepo.save(table);
+  }
 }

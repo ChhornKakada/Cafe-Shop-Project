@@ -12,4 +12,6 @@ public interface TableService {
     List <Tables> getAllTables();
 
     void changeToUnavalible(Long tableID, Long invoiceId);
+
+    void changeToAvalible(Long tableId);
 }

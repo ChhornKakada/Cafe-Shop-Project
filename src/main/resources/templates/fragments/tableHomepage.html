@@ -5,10 +5,10 @@
   </div>
 
   <!-- tables -->
-  <div class="w-full flex my-4">
+  <div class="w-full flex my-4 gap-2">
 
     <!-- tables list -->
-    <div class="w-1/2 border-2">
+    <div class="w-1/2 ">
       <!-- header -->
       <div
         class="text-center bg-[#1D1B31] font-bold text-white rounded-t-lg py-2 ">
@@ -20,7 +20,8 @@
         <div id="drink-section"
           class=" w-full flex h-[600px] flex-wrap gap-[2.66%] py-[2.66%]">
           <!-- display data -->
-          <div th:each="table : ${tables}" onclick="viewTableDetail(this)" th:tableId="${table.id}"
+          <div th:each="table : ${tables}" onclick="viewTableDetail(this)"
+            th:tableId="${table.id}"
             class="w-[23%] cursor-pointer hover:shadow-2xl hover:rounded-2xl rounded-lg text-white text-[1.2rem]
               flex justify-center items-center hover:bg-blue-500"
             th:classappend="${table.invoice_current_id} == null ? 'bg-[#1BA345]' : 'bg-[#DE3E44]'">
@@ -32,14 +33,14 @@
     </div>
 
     <!-- table informaton -->
-    <div class="w-1/2 border-2">
+    <div class="w-1/2">
       <!-- header -->
       <div
         class="text-center bg-[#1D1B31] font-bold text-white rounded-t-lg py-2">
         <p class="focus:bg-[#292D3E]">Order Informations</p>
       </div>
       <!-- orders list -->
-      <div class="h-[600px] bg-white px-24 py-12 border-2">
+      <div class="h-[600px] bg-white px-24 py-12 ">
 
         <!-- for table information -->
         <div class="h-[500px] overflow-auto">
@@ -130,26 +131,45 @@
         </div>
         <!-- change status -->
         <div class="h-[100px] flex justify-end items-start">
-          <!-- if admin  -->
+          <!-- only cashier can see this -->
           <div th:if="${isCashier == 'yes'}">
-            <form action="${cashier/tables/changeToAvailable/{tableId} (tableId=${table.id})}" method="POST" 
-            th:if="${table.invoice_current_id} != null"  th:object="${table}" >
-              <button 
-              class="bg-[#1D1B31] border-2 text-white px-4 rounded-lg text-[1.2rem] font-bold">Change to available</button>
+            <form
+              th:action="@{/cashier/tables/updateToAvailable/{tableId} (tableId=${table.id})}"
+              method="POST"
+              th:if="${table.invoice_current_id} != null" th:object="${table}">
+              <button type="submit"
+                class="bg-[#1D1B31] text-white px-4 rounded-lg text-[1.2rem] font-bold">
+                Change to available
+              </button>
             </form>
-            
-            <form action="#" th:object="${table}"  method="POST" id="tableForm">
-              <input type="text" th:value="${table.id}" class="hidden" id="tableId">
+
+            <form th:action="@{/cashier/tables/updateToUnavailable/{tableId} (tableId=${table.id})}" 
+              th:object="${table}" method="POST">
               <select th:if="${table.invoice_current_id} == null"
-              class="px-4 py-1 rounded-lg shadow-sm border-2 bg-slate-100"
-              onchange="changeToUnavailable()" 
-              id = "invoiceSelected">
-              <option value="0">Change to unavailable</option>
-              <option th:each="id : ${invoiceIds}" th:value="${id}" 
-                th:text="Invoice + ' ' + No + ' ' + ${id}">
-              </option>
-            </select>
+                class="px-4 py-1 rounded-lg shadow-sm border-2 bg-slate-100"
+                onchange="this.form.submit()" name="invoiceId">
+                <option value="0">Change to unavailable</option>
+                <option th:each="id : ${invoiceIds}" Th:value="${id}"
+                  th:text="Invoice + ' ' + No + ' ' + ${id}">
+                </option>
+              </select>
             </form>
+
+            <!-- <form th:action="#" th:object="${table}" method="POST" id="tableForm">
+              <input type="text" th:value="${table.id}" class="hidden"
+                id="tableId">
+              <select th:if="${table.invoice_current_id} == null"
+                class="px-4 py-1 rounded-lg shadow-sm border-2 bg-slate-100"
+                onchange="changeToUnavailable()"
+                id="invoiceSelected">
+                <option value="0">Change to unavailable</option>
+                <option th:each="id : ${invoiceIds}" th:value="${id}"
+                  th:text="Invoice + ' ' + No + ' ' + ${id}">
+                </option>
+              </select>
+            </form> -->
+
+
           </div>
           <!-- if cashier -->
         </div>

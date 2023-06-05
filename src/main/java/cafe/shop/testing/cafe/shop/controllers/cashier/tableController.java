@@ -67,11 +67,9 @@ public class tableController {
     // is busy means that have invoice
     if (table.getStatus().equals(Status.unavailable)) {
       model.addAttribute("invoice", invoiceSer.getVieId(table.getInvoice_current_id()));
-      model.addAttribute("changeToAva", "yes");
-    } else {
+    } else if (table.getStatus().equals(Status.available)) {
       model.addAttribute("invoiceIds", invoiceSer.getInvoiceIdsBoughtToday());
-      model.addAttribute("changeToAva", "no");
-    }
+    } 
 
     model.addAttribute("table", table);
     return "cashier/table";
@@ -79,7 +77,7 @@ public class tableController {
 
 
   // update table to unavailable
-  @PostMapping(path = "/cashier/tables/updateToUnavailable/{tableId}")
+  @PostMapping(path = "/cashier/tables/changeToUnavailable/{tableId}")
   public String updateToUnavailable(@PathVariable Long tableId, Model model, 
                                     @RequestParam("invoiceId") Long invoiceId){
     tableSer.changeToUnavalible(tableId, invoiceId);
@@ -88,7 +86,7 @@ public class tableController {
 
 
   // update table to available
-  @PostMapping(path = "/cashier/tables/updateToAvailable/{tableId}")
+  @PostMapping(path = "/cashier/tables/changeToAvailable/{tableId}")
   public String updateToAvailable(@PathVariable Long tableId, Model model) {
     tableSer.changeToAvalible(tableId);
     return "redirect:/cashier/tables/{tableId}";

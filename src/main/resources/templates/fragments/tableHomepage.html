@@ -134,13 +134,24 @@
         <!-- change status -->
         <div class="h-[100px] flex justify-end items-start">
           <!-- only cashier can see this -->
-          <!-- th:if="${table.invoice_current_id} == null" -->
           <div th:if="${isCashier == 'yes'}">
-            <form
-              th:action="@{/cashier/tables/updateToUnavailable/{tableId} (tableId=${table.id})}"
+            <form 
+              th:action="@{/cashier/tables/changeToAvailable/{tableId} (tableId=${table.id})}"
               th:object="${table}" 
               method="POST"
-              th:if="${changeToAva == 'no'}">
+              th:if="${table.invoice_current_id != null}"
+              >
+              <button type="submit"
+                class="bg-[#1D1B31] text-white px-4 rounded-lg py-2 font-bold">
+                Change to available
+              </button>
+            </form>
+
+            <form
+              th:action="@{/cashier/tables/changeToUnavailable/{tableId} (tableId=${table.id})}"
+              th:object="${table}" 
+              method="POST"
+              th:if="${table.invoice_current_id == null}">
               <select
                 class="px-4 py-2 rounded-xl shadow-sm  text-white  bg-[#1D1B31]"
                 onchange="this.form.submit()" name="invoiceId">
@@ -150,18 +161,6 @@
                 </option>
               </select>
             </form>
-
-            <form 
-              th:action="@{/cashier/tables/updateToAvailable/{tableId} (tableId=${table.id})}"
-              th:object="${table}" 
-              method="POST"
-              th:if="${changeToAva == 'yes'}">
-              <button type="submit"
-                class="bg-[#1D1B31] text-white px-4 rounded-lg py-2 font-bold">
-                Change to available
-              </button>
-            </form>
-
           </div>
           <!-- end if cashier -->
 

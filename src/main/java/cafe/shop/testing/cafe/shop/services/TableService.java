@@ -14,4 +14,6 @@ public interface TableService {
     void changeToUnavalible(Long tableID, Long invoiceId);
 
     void changeToAvalible(Long tableId);
+
+    // List <Tables> resetTableBeforeToday();
 }

@@ -111,7 +111,10 @@
               </div>
               <div class="w-3/5">
                 <div th:each="order : ${invoice.invoiceDetails}">
-                  <div th:if="${order.sustDetail.ctg.name} != null"
+                  <div th:if="${order.sustDetail.ctg} == null">
+                    <p th:text="${order.sustDetail.sust.name}"></p>
+                  </div>
+                  <div th:if="${order.sustDetail.ctg} != null"
                     class="flex">
                     <p th:text="${order.sustDetail.sust.name}"></p>
                     <p>&nbsp;&#40;</p>

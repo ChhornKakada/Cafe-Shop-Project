@@ -31,7 +31,7 @@ public class TableServiceImpl implements TableService {
 
   @Override
   public List<Tables> getAvailables() {
-    List <Tables> tables = new ArrayList<>();
+    List<Tables> tables = new ArrayList<>();
     for (var table : tableRepo.findAll()) {
       if (table.getStatus().equals(Status.available)) {
         tables.add(table);
@@ -47,7 +47,8 @@ public class TableServiceImpl implements TableService {
     if (table != null) {
       if (table.getStatus().equals(Status.available)) {
         table.setStatus(Status.unavailable);
-      } else table.setStatus(Status.available);
+      } else
+        table.setStatus(Status.available);
       tableRepo.save(table);
     }
   }
@@ -57,8 +58,10 @@ public class TableServiceImpl implements TableService {
     return tableRepo.findAll();
   }
 
-   @Override
-   public void changeToUnavalible(Long tableId, Long invoiceId){
+
+  // -----------------------------
+  @Override
+  public void changeToUnavalible(Long tableId, Long invoiceId) {
     Tables table = new Tables();
     table = tableRepo.findById(tableId).orElse(null);
 
@@ -70,7 +73,7 @@ public class TableServiceImpl implements TableService {
     invoice = invoiceRepo.findById(invoiceId).orElse(null);
     invoice.setTable(table);
     invoiceRepo.save(invoice);
-   }
+  }
 
   @Override
   public void changeToAvalible(Long tableId) {
@@ -80,4 +83,15 @@ public class TableServiceImpl implements TableService {
     table.setStatus(Status.available);
     tableRepo.save(table);
   }
+
+  // @Override
+  // public List<Tables> resetTableBeforeToday() {
+  //   // orderedAt match of the class in java not column in sql
+  //   String jpql = "SELECT * FROM Tables t WHERE DATE(i.orderedAt) = :today AND i.table IS NULL";
+  //   TypedQuery<Long> query = entityManager.createQuery(jpql, Long.class);
+  //   query.setParameter("today", new Date(System.currentTimeMillis()));
+  //   List<Long> invoiceIds = query.getResultList();
+
+  //   return invoiceIds;
+  // }
 }

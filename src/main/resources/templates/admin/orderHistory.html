@@ -101,8 +101,8 @@
                   <p th:text="${iterStat.index + 1}"></p>
                 </div>
                 <div class="w-[8%]">
-                  <a
-                  th:text="${invoice.id}"></a>
+                  <a th:href="@{/admin/order_history/view/{id} (id=${invoice.id})}"
+                  th:text="'Number. ' + ${invoice.id}"></a>
                 </div>
                 <div class="w-[15%]">
                   <p th:text="${invoice.orderedAt}"></p>

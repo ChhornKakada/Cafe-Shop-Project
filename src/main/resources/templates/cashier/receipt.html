@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript" th:src="@{/tailwind.js}"></script>
+  <!-- <link rel="stylesheet" href="../../static/img/cashier/receipt/logo.jpg"> -->
+
+  <style>
+    @media print {
+      #card {
+        margin-top: 0;
+        top: 30px;
+        left: 50%;
+        position: none;
+        transform: translate(-50%, 0);
+      }
+
+      #buttons {
+        display: none;
+      }
+
+    }
+  </style>
+</head>
+
+<body class="bg-[url('../../static/img/cashier/receipt/logo.jpg')]">
+
+  <!-- center -->
+  <div id="card" class="w-[480px]  absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+    <!-- receipt card -->
+    <div class="rounded-lg border-2">
+      <div class="p-4">
+        <div class="text-center text-[1.2rem] font-bold border-b-2">
+          <h1>GIC Café - A1</h1>
+          <h1 class="text-[2rem]" th:text="${invoice.id}"></h1>
+        </div>
+        <div class="border-b-2">
+          <p class="font-medium">Address: <span class="font-normal"> ITC, Russian Conf, Norodom Blvd, Phnom Penh</span>
+          </p>
+          <p class="font-medium">Tel: <span class="font-normal">+855 17702078</span></p>
+        </div>
+
+        <!-- cashier, table and orderDate -->
+        <div class="flex gap-8 py-4">
+          <div class="font-medium">
+            <p>Ordered At</p>
+            <p>Table No. </p>
+            <p>Cashier</p>
+          </div>
+          <div>
+            <p>: <span th:text="${invoice.orderedAt}"></span></p>
+            <p th:if="${invoice.table} != null" th:text="': ' + ${invoice.table.id}"></p>
+            <p th:if="${invoice.table} == null">:</p>
+            <p>: <span th:text="${invoice.emp.name}"></span></p>
+          </div>
+        </div>
+
+        <!-- table of order detail -->
+        <div class="rounded-lg bg-[#F9F9F9]">
+          <table class="table-light table-auto w-full">
+            <thead>
+              <tr class="tracking-wider text-left">
+                <th class="sticky top-0  py-1 bg-[#EEEEEE] pl-2 ">No</th>
+                <th class="sticky top-0 bg-[#EEEEEE]  ">Sust</th>
+                <th class="sticky top-0 bg-[#EEEEEE] ">ctg</th>
+                <th class="sticky top-0 bg-[#EEEEEE]  text-center">size</th>
+                <th class="sticky top-0 bg-[#EEEEEE] text-right">unit</th>
+                <th class="sticky top-0 bg-[#EEEEEE] text-right">addon</th>
+                <th class="sticky top-0 bg-[#EEEEEE]  text-right">qty</th>
+                <th class="sticky top-0 bg-[#EEEEEE]  pr-2 text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody class="" id="orderList">
+              <tr th:each="orderDetail, iterStat : ${invoice.invoiceDetails}" class="border-b"
+                th:classappend="${iterStat.index + 1}%2 == 0 ? 'bg-[#F9F9F9]' : 'bg-white'">
+                <td class="pl-2" th:text="${iterStat.index + 1}"></td>
+                <td th:text="${orderDetail.sustDetail.sust.name}"></td>
+
+                <!-- ctg -->
+                <td th:if="${orderDetail.sustDetail.ctg} != null" th:text="${orderDetail.sustDetail.ctg.name}"></td>
+                <td th:unless="${orderDetail.sustDetail.ctg} != null">-</td>
+
+                <!-- size -->
+                <td th:if="${orderDetail.sustDetail.size} != null" class="text-center">
+                  <span th:switch="${orderDetail.sustDetail.size.size}">
+                    <span th:case="'Small'">S</span>
+                    <span th:case="'Medium'">M</span>
+                    <span th:case="'Large'">L</span>
+                  </span>
+                </td>
+                <td th:unless="${orderDetail.sustDetail.size} != null" class="text-center">-</td>
+
+
+                <td class="text-right" th:text="'$' + ${orderDetail.sustDetail.price }"></td>
+
+
+                <th th:if="${orderDetail.addon} == null" class="font-normal text-right">-</th>
+                <th th:if="${orderDetail.addon} != null" th:text="'$' + ${orderDetail.addon.totalPrice}" class="font-normal text-right"></th>
+                <td class="text-right" th:text="${orderDetail.qty}"></td>
+                <td class="text-right pr-2" th:text="'$ ' + ${orderDetail.totalPrice }"></td>
+                <td></td>
+              </tr>
+            </tbody>
+        </div>
+        </table>
+      </div>
+      <!-- end table of order detail -->
+
+      <!-- start endign -->
+      <div class="flex gap-6 justify-end p-2 border-b-2">
+        <div class="font-medium">
+          <p>Total price</p>
+          <p>Cash received</p>
+          <p>Changed</p>
+        </div>
+        <div class="flex gap-[2px]">
+          <div>
+            <p>: </p>
+            <p>: </p>
+            <p>: </p>
+          </div>
+          <div class="text-right">
+            <p th:text="'$' + ${invoice.totalPrice}"></p>
+            <p th:text="'$' + ${invoice.cashReceived}"></p>
+            <p th:text="'$' + ${invoice.changed}"></p>
+          </div>
+        </div>
+      </div>
+      <!-- end ending -->
+
+      <div class="text-center font-medium">
+        <p class="">WIFI password: gicitci4a1</p>
+        <p>Delivery Hotline: +855 23215215</p>
+      </div>
+    </div>
+  </div>
+  <!-- button -->
+  <div class="flex justify-center mt-4 gap-3" id="buttons">
+    <a id="back" th:href="@{/cashier/order}" class="rounded-lg px-3 text-white bg-[#28A745]">Back</a>
+    <button id="print" onclick="window.print()" class="bg-[#007BFF] rounded-lg text-white px-3 ">Print</button>
+  </div>
+  <!-- end card receipt -->
+
+  <!-- <script>
+    function print() {
+      window.print();
+    }
+  </script> -->
+
+
+</body>
+
+</html>

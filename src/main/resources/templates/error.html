@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error 404</title>
+  <script type="text/javascript" th:src="@{/tailwind.js}"></script>
+</head>
+<body>
+  <div class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
+    <p class="text-center text-[1.5rem] font-medium text-[#263238] tracking-wide">
+      The page you are finding is not found!</p>
+    <img th:src="@{/img/error_page/robotError.png}" alt="Robot Error" class="w-[400px] mr-auto mx-auto">
+    <div class="flex justify-center">
+      <button onclick="window.history.back()" class="bg-[#263238] text-white rounded-lg px-4 font-medium tracking-wider">Go Back :&#40;</button>
+    </div>
+    
+  </div>
+</body>
+</html>

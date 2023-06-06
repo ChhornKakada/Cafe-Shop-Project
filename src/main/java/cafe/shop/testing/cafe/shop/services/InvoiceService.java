@@ -13,6 +13,6 @@ public interface InvoiceService {
   Invoice addAnOrderdetailDrink(Sustenance drink, String ctg, String note, String size, Integer qty, String topping1String,
                            String topping2, Invoice invoice);
   Invoice addAnOrderdetailFood(Long foodId, Integer qty, String note, Invoice invoice);
-  void checkout(Invoice invoice, Double cashReceived, String cashierUsername, Long tableId);
+  Invoice checkout(Invoice invoice, Double cashReceived, String cashierUsername, Long tableId);
   List<Long> getInvoiceIdsBoughtToday();
 }

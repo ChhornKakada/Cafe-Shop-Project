@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+// import cafe.shop.testing.cafe.shop.controllers.cashier.receipt;
 import cafe.shop.testing.cafe.shop.entities.Addon;
 import cafe.shop.testing.cafe.shop.entities.AddonDetail;
 import cafe.shop.testing.cafe.shop.entities.Employee;
@@ -106,8 +107,13 @@ public class InvoiceServiceImpl implements InvoiceService {
     toppingTotalPrice *= qty;
 
     Addon addon = new Addon();
-    addon.setAddonDetails(addonDetail);
-    addon.setTotalPrice(new BigDecimal(toppingTotalPrice));
+    if (addonDetail != null) {
+      addon.setAddonDetails(addonDetail);
+      BigDecimal totalAddonPrice = new BigDecimal(toppingTotalPrice);
+      totalAddonPrice = totalAddonPrice.setScale(2, RoundingMode.HALF_UP);
+      addon.setTotalPrice(totalAddonPrice);
+    }
+    
     
     orderDetail.setAddon(addon);
 
@@ -160,7 +166,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
   @Override
-  public void checkout(Invoice invoice, Double cashReceived, String cashierUsername, Long tableId) {
+  public Invoice checkout(Invoice invoice, Double cashReceived, String cashierUsername, Long tableId) {
     Employee cashier = new Employee();
     cashier = empRepo.findByUsername(cashierUsername);
 
@@ -194,7 +200,12 @@ public class InvoiceServiceImpl implements InvoiceService {
       table.setInvoice_current_id(invoiceTmp.getId());
       tableRepo.save(table);
     }
+
+    return invoiceTmp;
   }
+
+
+  // get order that bought today
   @Override
   public List<Long> getInvoiceIdsBoughtToday() {
     // orderedAt match of the class in java not column in sql

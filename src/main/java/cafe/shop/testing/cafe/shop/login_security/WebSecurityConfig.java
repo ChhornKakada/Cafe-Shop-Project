@@ -41,6 +41,9 @@ public class WebSecurityConfig {
         .loginProcessingUrl("/login")
         .permitAll()
         .and()
+        .exceptionHandling()
+          .accessDeniedPage("/forbidden")
+        .and()
         .logout().logoutUrl("/logout")
         .logoutSuccessUrl("/")
         .permitAll();

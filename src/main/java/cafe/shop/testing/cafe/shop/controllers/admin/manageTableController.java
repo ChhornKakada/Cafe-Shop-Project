@@ -41,13 +41,6 @@ public class manageTableController {
     } 
     // means that the tables is avalible
     model.addAttribute("invoiceIds", invoiceSer.getInvoiceIdsBoughtToday());
-    // else {
-    //   List <Long> invoiceIds = new ArrayList<>();
-    //   invoiceIds = invoiceSer.getInvoiceIdsBoughtToday();
-    //   if (invoiceIds != null) {
-        
-    //   }
-    // }
     model.addAttribute("table", table);
     return "admin/manageTable";
   }

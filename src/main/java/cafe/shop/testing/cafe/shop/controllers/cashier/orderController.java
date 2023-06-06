@@ -129,7 +129,11 @@ public class orderController {
                               HttpSession session, Double cashReceived, Model model) {
     Invoice invoice = (Invoice) session.getAttribute("invoice");
     String tableId = (String) session.getAttribute("tableId");
-    invoiceService.checkout(invoice, cashReceived, cashierName, Long.valueOf(tableId));
-    return "redirect:/cashier/order";
+
+    Invoice invoieTmp = new Invoice();
+    invoieTmp = invoiceService.checkout(invoice, cashReceived, cashierName, Long.valueOf(tableId));
+    model.addAttribute("invoice", invoieTmp);
+    return "/cashier/receipt";
   }
+
 }

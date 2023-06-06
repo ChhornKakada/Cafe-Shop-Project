@@ -24,10 +24,11 @@ public class orderDetailController {
     return "admin/orderHistory";
   }
 
+  // view order detail of an invoice
   @GetMapping("/admin/order_history/view/{invoiceId}")
-  public String viewOrderhistoryPage(@PathVariable Long invoiceId, Model model){
+  public String viewInvoiceDetail(@PathVariable Long invoiceId, Model model){
     model.addAttribute("invoice", invoiceSer.getVieId(invoiceId));
-    return "admin/drink";
+    return "admin/edit_InforDatail/viewOrderDetail";
   }
 
 }

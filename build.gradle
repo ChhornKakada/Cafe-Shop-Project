@@ -54,3 +54,5 @@ flyway {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
